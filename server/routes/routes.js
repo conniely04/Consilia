@@ -10,14 +10,12 @@ const Activity = require("../schemas/activity");
 const FriendGroup = require("../schemas/friendgroup");
 const Hangout = require("../schemas/hangout");
 
-// Define routes and associate them with controller methods
-router.post("/friend-groups/create", friendGroupController.createFriendGroup);
-//router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
-router.post("/activities/add", activityController.addActivity);
-//router.post("/locations", locationController.createLocation);
-//router.post("/hangouts/create", hangoutController.createHangout);
+//post requests
 router.post("/register", userController.registerUser);
+router.post("/friend-groups/create", friendGroupController.createFriendGroup);
+router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
 
+//GET REQUESTS
 //displays all users in the database
 router.get("/register", async (req, res) => {
   try {
@@ -43,7 +41,8 @@ router.get("/friend-groups", async (req, res) => {
       .json({ message: "Failed to fetch friend groups", error: error });
   }
 });
-//FRONTEND USE THIS TO DISPLAY FRIEND GROUPS
+
+//FRONTEND USE THIS TO DISPLAY FRIEND GROUPS for all users
 router.get("/friend-groups/:groupId", friendGroupController.getFriendGroup);
 
 router.get("/hangouts", async (req, res) => {
@@ -54,19 +53,6 @@ router.get("/hangouts", async (req, res) => {
   } catch (error) {
     console.error("Failed to fetch hangouts:", error);
     res.status(500).json({ message: "Failed to fetch hangouts", error: error });
-  }
-});
-
-router.get("/activities", async (req, res) => {
-  try {
-    const activities = await Activity.find({});
-    console.log(activities); // This will print the activities to the console
-    res.json(activities); // This sends the activities to the client
-  } catch (error) {
-    console.error("Failed to fetch activities:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch activities", error: error });
   }
 });
 

@@ -1,12 +1,14 @@
 const User = require("../schemas/user");
 const FriendGroup = require("../schemas/friendgroup");
+const bcrypt = require("bcryptjs");
 
 //testing
 exports.registerUser = async (req, res) => {
   try {
-    const { username } = req.body;
-    //const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username });
+    const { username, fullName, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ username, fullName, password: hashedPassword });
     await newUser.save();
     res.status(201).send("User registered");
   } catch (error) {
