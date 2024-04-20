@@ -22,7 +22,10 @@ function Login() {
                     Password:
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                 </label>
+                <div className="start-button">
+
                 <button type="submit">Login</button>
+                </div>
             </form>
         </div>
     );
