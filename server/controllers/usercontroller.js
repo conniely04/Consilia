@@ -10,7 +10,9 @@ exports.registerUser = async (req, res) => {
 
     const newUser = new User({ username, fullName, password: hashedPassword });
     await newUser.save();
-    res.status(201).send("User registered");
+
+    // Send a JSON response
+    res.status(201).json({ message: "User registered" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
