@@ -37,7 +37,10 @@ function CreateAccount() {
                     Password:
                     <input name="password" type="password" value={formData.password} onChange={handleChange} />
                 </label>
+                <div className="start-button">
+
                 <button type="submit">Create Account</button>
+                </div>
             </form>
         </div>
     );
