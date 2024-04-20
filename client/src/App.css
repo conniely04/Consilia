@@ -33,10 +33,33 @@
   }
 }
 
-.card {
-  padding: 2em;
+.description-card {
+  padding: 1em;
+  background-color: #ffffff;
+  border-radius: 1em;
+  justify-content: center; /* Align items horizontally in the center */
+  /* width: 80%; */
 }
 
-.read-the-docs {
-  color: #888;
+.description-card p {
+  color: #000000;
+  margin-left: 3em;
+  margin-right: 3em;
+  letter-spacing: 0.03em; /* Add spacing between characters */
+}
+
+.start-button {
+  padding: 1em;
+  color: #ffffff;
+  font-size: 1.3em;
+}
+
+.start-button button {
+  background-color: #004419;
+  color: white;
+}
+
+.title-name {
+  color: #ffffff;
+  letter-spacing: 0.2em; /* Add spacing between characters */
 }

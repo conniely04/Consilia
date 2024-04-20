@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="title-name">
+        <h1>🍃Questify🍃</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <div className="description-card">
+        <div>
+          <h3>
+            Looking to explore the outdoors? <u>Make it happen!</u>
+          </h3>
+        </div>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Set your scene by choosing preferences, and snap your pre-trip selfie.
+          Spotify and Gemini will work together to generate your playlist and
+          walk quests. Then, finish by snapping a post-trip selfie, and get a
+          summary of your adventure.
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <h2 className="ready-to-start">
+        ready to start?
+      </h2> */}
+      <div className="start-button">
+        <button>
+          <b>START</b>
+        </button>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
