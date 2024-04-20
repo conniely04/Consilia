@@ -21,7 +21,6 @@ export default function Landing() {
         Connect with friends and dive into lively gatherings. Exchange event concepts and stay in tune with members' interests. With Gemini Pro's insightful analysis of everyone's preferences, planning your next event is a breeze.
 
 
-
         </p>
       </div>
       {/* <h2 className="ready-to-start">
