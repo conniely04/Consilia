@@ -1,23 +1,25 @@
 .user_home_title {
   text-align: center;
   margin-top: 0;
-
 }
 
 .bubbles {
   text-align: center;
+  color: black;
 }
 
 .bubble-button {
   border-radius: 0;
+  color: black;
 }
 
 .bubble-name {
+  color: black;
   margin-left: 250px;
-
 }
 
 .join_button,
 .create_button {
+  color: black;
   font-size: 1m;
 }
