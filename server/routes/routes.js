@@ -12,6 +12,7 @@ const Hangout = require("../schemas/hangout");
 
 //post requests
 router.post("/register", userController.registerUser);
+router.post("/login", userController.loginUser)
 router.post("/friend-groups/create", friendGroupController.createFriendGroup);
 router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
 

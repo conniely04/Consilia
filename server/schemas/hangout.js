@@ -9,8 +9,13 @@ const hangoutSchema = new Schema({
     ref: "FriendGroup",
     required: true,
   },
-  created_by: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  activities: [{ type: Schema.Types.ObjectId, ref: "Activity" }],
+  created_by: { 
+    type: Schema.Types.ObjectId, 
+    ref: "User", 
+    required: true },
+  activities: [{ 
+    type: Schema.Types.ObjectId, 
+    ref: "Activity" }],
 });
 
 const Hangout = mongoose.model("Hangout", hangoutSchema);
