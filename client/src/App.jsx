@@ -18,7 +18,7 @@ function App() {
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path ="/bubbles/:name" element={<HangoutSpace/>}/>
           <Route path="/create-hangout" element={<CreateHangout />} />
-          {/* <Route path="/test" element={<User_Home/>} /> */}
+          <Route path="/test" element={<User_Home/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
