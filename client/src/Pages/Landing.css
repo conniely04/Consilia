@@ -12,9 +12,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -24,7 +26,8 @@
   padding: 1em;
   background-color: #ffffff;
   border-radius: 1em;
-  justify-content: center; /* Align items horizontally in the center */
+  justify-content: center;
+  /* Align items horizontally in the center */
   /* width: 80%; */
 }
 
@@ -33,7 +36,14 @@
   /* margin-left: 3em;
   margin-right: 3em; */
   padding: 1em;
-  letter-spacing: 0.03em; /* Add spacing between characters */
+  letter-spacing: 0.03em;
+  /* Add spacing between characters */
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .start-button {
@@ -49,5 +59,7 @@
 
 .title-name {
   color: #ffffff;
-  letter-spacing: 0.2em; /* Add spacing between characters */
+  letter-spacing: 0.2em;
+  margin-top: -30px;
+  /* Add spacing between characters */
 }
