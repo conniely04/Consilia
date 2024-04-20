@@ -11,11 +11,11 @@ export default function Landing() {
         <h1>🍃Questify🍃</h1>
       </div>
       <div className="description-card">
-        <div>
+        {/* <div> */}
           <h3>
             Looking to explore the outdoors? <u>Make it happen!</u>
           </h3>
-        </div>
+        {/* </div> */}
         <p>
           Set your scene by choosing preferences, and snap your pre-trip selfie.
           Spotify and Gemini will work together to generate your playlist and
