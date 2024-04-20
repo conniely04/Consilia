@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 // import './Login.css';  // Assume you have styles defined in Login.css
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,6 +28,9 @@ function Login() {
             const result = await response.json();
             console.log("Logged in successfully:", result);
             alert("Logged in successfully");
+
+            // Redirect to user_home after successful login
+            navigate('/user-home');
           } else {
             throw new Error("Failed to login");
           }
@@ -50,7 +54,7 @@ function Login() {
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                 </label>
                 <div className="start-button">
-                <button type="submit">Login</button>
+                <button type="submit">LOGIN</button>
                 </div>
             </form>
         </div>
