@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./Landing.css";
 
@@ -8,28 +9,33 @@ export default function Landing() {
   return (
     <>
       <div className="title-name">
-        <h1>🍃Questify🍃</h1>
+        <h1>🍃Consilia🍃</h1>
       </div>
       <div className="description-card">
         {/* <div> */}
-          <h3>
-            Looking to explore the outdoors? <u>Make it happen!</u>
-          </h3>
+        <h3>
+        Unsure about the event's vibe? <u>Ignite the fun and make it jive!</u>
+        </h3>
         {/* </div> */}
         <p>
-          Set your scene by choosing preferences, and snap your pre-trip selfie.
-          Spotify and Gemini will work together to generate your playlist and
-          walk quests. Then, finish by snapping a post-trip selfie, and get a
-          summary of your adventure.
+        Connect with friends and dive into lively gatherings. Exchange event concepts and stay in tune with members' interests. With Gemini Pro's insightful analysis of everyone's preferences, planning your next event is a breeze.
+
+
+
         </p>
       </div>
       {/* <h2 className="ready-to-start">
         ready to start?
       </h2> */}
-      <div className="start-button">
-        <button>
-          <b>START</b>
-        </button>
+      <div className="buttons">
+        <div className="start-button">
+          <Link to="/create-account"><button><b>CREATE ACCOUNT</b></button></Link>
+
+        </div>
+        <div className="start-button">
+          <Link to="/login"><button><b>LOGIN</b></button></Link>
+
+        </div>
       </div>
     </>
   );
