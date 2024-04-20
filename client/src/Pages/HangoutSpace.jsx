@@ -7,15 +7,15 @@ export default function HangoutSpace() {
     const propogateHangouts = hangouts.map((hangoutName, index) => (
         <div key={index}>
 
-            
-                <button className="hangout-name"  >
-                    {hangoutName}
-                    <Link to={`/${hangoutName}`} className="hangout-link">
-                    <button className="join-button">join</button>
-                    </Link>
 
-                    <hr />
-                </button>
+            <button className="hangout-name"  >
+                {hangoutName}
+                <Link to={`/${hangoutName}`} className="hangout-link">
+                    <button className="join-button">join</button>
+                </Link>
+
+                <hr />
+            </button>
         </div>
     ))
 
