@@ -1,0 +1,23 @@
+.user_home_title {
+  text-align: center;
+  margin-top: 0;
+
+}
+
+.bubbles {
+  text-align: center;
+}
+
+.bubble-button {
+  border-radius: 0;
+}
+
+.bubble-name {
+  margin-left: 250px;
+
+}
+
+.join_button,
+.create_button {
+  font-size: 1m;
+}
