@@ -78,7 +78,10 @@ function CreateAccount() {
             onChange={handleChange}
           />
         </label>
+        <div className="start-button">
+
         <button type="submit">Create Account</button>
+        </div>
       </form>
     </div>
   );
