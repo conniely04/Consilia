@@ -61,3 +61,16 @@ exports.joinFriendGroup = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getUserFriendGroups = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const friendGroups = await FriendGroup.find({ members: userId }).populate(
+      "members",
+      "username"
+    );
+    res.json(friendGroups);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
