@@ -16,6 +16,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  friendGroups: [
+    {
+      // New field for storing group references
+      type: Schema.Types.ObjectId,
+      ref: "FriendGroup",
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);
