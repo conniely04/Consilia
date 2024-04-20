@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 // import './CreateAccount.css';  // Assume you have styles defined in CreateAccount.css
 
 function CreateAccount() {
