@@ -1,0 +1,89 @@
+#root {
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 10vw;
+    text-align: center;
+}
+
+.hangout-description-card {
+    color: black;
+    padding: 1em;
+    background-color: #1c7445;
+    border-radius: 1em;
+    justify-content: center;
+}
+
+.hangout-description-card p {
+    color: #000000;
+    padding: 1em;
+    letter-spacing: 0.03em;
+}
+
+/* .input-card {
+    color: black;
+    padding: 1em;
+    background-color: black;
+    border-radius: 1em;
+    justify-content: center;
+}
+
+.input-card p {
+    color: #000000;
+    padding: 1em;
+    letter-spacing: 0.03em;
+} */
+
+.input-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    /* Adjust width as needed */
+    margin: 0 auto;
+    /* Center horizontally */
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.input-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 6px;
+    background-color: #f4f4f4;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    
+}
+
+.input-bar input::placeholder {
+    color: #999;
+}
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.start-button {
+    padding: 1em;
+    color: #ffffff;
+    font-size: 1.3em;
+}
+
+.start-button button {
+    background-color: #004419;
+    color: white;
+}
+
+.title-name {
+    color: #ffffff;
+    letter-spacing: 0.1em;
+    margin-top: -30px;
+    font-size: smaller;
+    /* Add spacing between characters */
+}
