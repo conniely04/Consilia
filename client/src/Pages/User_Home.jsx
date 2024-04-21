@@ -13,7 +13,6 @@ export default function User_Home() {
 
             const userId = localStorage.getItem('userId');
             const url = `http://localhost:5002/api/friend-groups/${userId}`;
-            console.log(userId)
             
             try {
                 const response = await fetch(url, {
@@ -58,7 +57,7 @@ export default function User_Home() {
                 <h1>Friend Bubbles</h1>
             </div>
             <div className="buttons">
-                <button className="join_button" style={{ marginRight: '30px' }}>Join Bubble</button >
+                <Link to="/join-bubble"><button className="join_button" style={{ marginRight: '30px' }}>Join Bubble</button ></Link>
                 <button className="create_button">Create Bubble</button>
             </div>
             <br />
