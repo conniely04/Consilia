@@ -2,11 +2,8 @@ const Hangout = require("../schemas/hangout");
 
 exports.createHangout = async (req, res) => {
   try {
-    const { title, date, friendGroupId, userId } = req.body;
+    const { userId } = req.body;
     const newHangout = new Hangout({
-      title,
-      date,
-      friendGroup: friendGroupId,
       created_by: userId,
       participants: [userId],
     });

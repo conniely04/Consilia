@@ -11,11 +11,34 @@ export default function CreateHangout() {
     const [createdActivity, setCreatedActivity] = useState(false);
     const [activityText, setActivityText] = useState("");
     const navigate = useNavigate(); // Initialize useNavigate
+    const userId = localStorage.getItem('userId');
 
-    const handleSubmit = () => {
-        // Handle the submission, for example, send the hangoutName to your backend
-        setCreatedActivity(true);
-        setActivityText('Add Another Activity?')
+    const handleSubmit = async() => {
+        const url = "http://localhost:5002/hangouts/create";
+        try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: userId,
+            }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log("Created successfully:", result);
+ 
+            navigate("/");
+        } else {
+            throw new Error("Failed");
+        }
+        } catch (error) {
+        console.error("Error", error);
+
+        }
+        
         console.log("Hangout name submitted:", hangoutName);
     };
 
@@ -54,7 +77,7 @@ export default function CreateHangout() {
                 <h1>🍃Create Hangout🍃</h1>
             </div>
             <div className="hangout-description-card">
-                <h3>What do you want to do?</h3>
+                <h3>What do you have in mind?</h3>
             </div>
             <div className="add-extra-activity">
                 <h3>{activityText}</h3>
