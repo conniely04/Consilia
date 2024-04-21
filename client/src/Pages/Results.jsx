@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function Results(options) {
+  const [results, setResults] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     // Define the function inside the effect
+    const storedOptions = localStorage.getItem("optionsData");
+    if (storedOptions) {
+      setResults(JSON.parse(storedOptions)); // Parse the stored string back into an object
+    }
+
     const getOptions = async () => {
       setIsLoading(true);
       try {
@@ -26,7 +32,7 @@ export default function Results(options) {
         }
 
         const data = await response.json();
-        setOptions(data.options); // Make sure to match the response structure from your backend
+        setResults(data.options); // Make sure to match the response structure from your backend
       } catch (error) {
         console.error("Failed to fetch options:", error);
       }
@@ -35,10 +41,7 @@ export default function Results(options) {
 
     // Call the function
     console.log("WHAT:", getOptions());
-    if (location.state && location.state.options) {
-      setOptions(location.state.options);
-    }
-  }, [location]);
+  }, []);
   console.log("OPTIONS:", options);
   return (
     <div>
@@ -47,7 +50,7 @@ export default function Results(options) {
       ) : (
         <div>
           <h2>Generated Options</h2>
-          <p>{JSON.stringify(options, null, 2)}</p>
+          <p>{results}</p>
         </div>
       )}
     </div>
