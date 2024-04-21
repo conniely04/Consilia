@@ -1,52 +1,54 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./User_Home.css";
 
 export default function User_Home() {
-    const [nameBubbles, setNameBubbles] = useState([]);
+    //const nameBubbles = ["team1", 'team2', 'team3']; //replace w database info
+    const [friendGroups, setFriendGroups] = useState([]);
 
-    // bubble data format: bubble name: participants (names)
 
     useEffect(() => {
-        // Fetch user's data from the backend
-        const fetchUserData = async () => {
+        const fetchFriendGroups = async () => {
+
+            const userId = localStorage.getItem('userId');
+            const url = `http://localhost:5002/api/friend-groups/${userId}`;
+            
             try {
-                const response = await fetch("http://localhost:5002/api/user", {
+                const response = await fetch(url, {
                     method: "GET",
                     headers: {
-                        "Authorization": `Bearer ${userToken}` // Assuming userToken is available after login
+                        "Content-Type": "application/json",
                     },
                 });
+        
                 if (response.ok) {
-                    const userData = await response.json();
-                    const friendGroups = userData.friendGroups.map(group => group.name);
-                    setNameBubbles(friendGroups);
+                    const result = await response.json();
+                    setFriendGroups(result)
+                    console.log("Successfully got friend groups", result);
                 } else {
-                    throw new Error("Failed to fetch user data");
+                    throw new Error("Failed to get friend groups");
                 }
             } catch (error) {
-                console.error("Error fetching user data:", error);
-                // Handle error
+                console.error("Error:", error);
             }
         };
-
-        fetchUserData();
+    
+        fetchFriendGroups();
     }, []);
-    const propogateBubbles = nameBubbles.map((bubbleName, index) => (
+
+    const propogateBubbles = friendGroups.map((friendGroup, index) => (
         <div key={index}>
-            <Link to={`/bubbles/${bubbleName}`} className="bubble-link">
+            <Link to={`/bubbles/${friendGroup.name}`} className="bubble-link">
                 <button className="bubble-button"  >
-                    {bubbleName}
-                    <span className="bubble-name" >#ppl</span>
+                    {friendGroup.name}
+                    <span className="bubble-name" >{friendGroup.members.length}</span>
                     <hr />
                 </button>
             </Link>
         </div>
 
     ));
-
-
 
     return (
 
@@ -55,8 +57,8 @@ export default function User_Home() {
                 <h1>Friend Bubbles</h1>
             </div>
             <div className="buttons">
-                <button className="join_button" style={{ marginRight: '30px' }}>Join Bubble</button >
-                <button className="create_button">Create Bubble</button>
+                <Link to="/join-bubble"><button className="join_button" style={{ marginRight: '30px' }}>Join Bubble</button ></Link>
+                <Link to="/create-bubble"><button className="create_button">Create Bubble</button></Link>
             </div>
             <br />
             <div className="bubbles">
