@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import './CreateAccount.css';  // Assume you have styles defined in CreateAccount.css
 
 function CreateAccount() {
+  const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     username: "",
     fullName: "",
@@ -37,6 +39,7 @@ function CreateAccount() {
         const result = await response.json();
         console.log("Account created successfully:", result);
         alert("Account created successfully!");
+        navigate('/');
       } else {
         throw new Error("Failed to create account");
       }

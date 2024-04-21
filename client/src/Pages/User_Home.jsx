@@ -4,11 +4,35 @@ import { Link } from "react-router-dom";
 import "./User_Home.css";
 
 export default function User_Home() {
-    const nameBubbles = ["team1", 'team2', 'team3']; //replace w database info
+    const [nameBubbles, setNameBubbles] = useState([]);
 
     // bubble data format: bubble name: participants (names)
 
+    useEffect(() => {
+        // Fetch user's data from the backend
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch("http://localhost:5002/api/user", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${userToken}` // Assuming userToken is available after login
+                    },
+                });
+                if (response.ok) {
+                    const userData = await response.json();
+                    const friendGroups = userData.friendGroups.map(group => group.name);
+                    setNameBubbles(friendGroups);
+                } else {
+                    throw new Error("Failed to fetch user data");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                // Handle error
+            }
+        };
 
+        fetchUserData();
+    }, []);
     const propogateBubbles = nameBubbles.map((bubbleName, index) => (
         <div key={index}>
             <Link to={`/bubbles/${bubbleName}`} className="bubble-link">

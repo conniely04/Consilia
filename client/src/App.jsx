@@ -8,6 +8,7 @@ import Footer from "./Components/Footer.jsx";
 import User_Home from "./Pages/User_Home.jsx";
 import HangoutSpace from "./Pages/HangoutSpace.jsx";
 import MemberList from "./Pages/MemberList.jsx";
+import JoinBubble from "./Pages/JoinBubble.jsx";
 
 function App() {
   return (
