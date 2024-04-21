@@ -66,4 +66,21 @@ router.get("/hangouts/:hangoutId", hangoutController.getHangout);
 
 router.get("/hangouts", hangoutController.getAllHangouts);
 
+//get members in specified friend group
+router.get("/friend-groups/:groupId/members", async (req, res) => {
+  try {
+    const { groupId } = req.params;
+    const friendGroup = await FriendGroup.findById(groupId).populate("members");
+
+    if (!friendGroup) {
+      return res.status(404).json({ message: "Friend group not found" });
+    }
+
+    res.status(200).json(friendGroup.members);
+  } catch (error) {
+    console.error("Failed to retrieve friend group members:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 module.exports = router;

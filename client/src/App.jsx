@@ -1,5 +1,8 @@
 import "./App.css";
 import Landing from "./Pages/Landing";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Login from "./Pages/Login";
 import CreateAccount from "./Pages/CreateAccount";
 import CreateHangout from "./Pages/CreateHangout";
@@ -14,6 +17,7 @@ import CreateBubble from "./Pages/CreateBubble.jsx";
 function App() {
   return (
     <>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -24,7 +28,7 @@ function App() {
           <Route path="/join-bubble" element={<JoinBubble />} />
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
-          <Route path="members" element={<MemberList />} />
+          <Route path="/members" element={<MemberList />} />
         </Routes>
         <Footer />
       </BrowserRouter>

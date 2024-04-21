@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify"; // Import toast
 import { useNavigate, Link } from "react-router-dom"; // Import useNavigate
-// import './Login.css';  // Assume you have styles defined in Login.css
+import "./Login.css"; // Assume you have styles defined in Login.css
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -27,20 +28,19 @@ function Login() {
       if (response.ok) {
         const result = await response.json();
         console.log("Logged in successfully:", result);
-        alert("Logged in successfully");
-
+        //toast notification
+        toast.success("Logged in successfully");
         // Redirect to user_home after successful login
         navigate("/user-home");
 
-        localStorage.setItem('userId', result.userId);
+        localStorage.setItem("userId", result.userId);
         //const userId = localStorage.getItem('userId');
-
       } else {
         throw new Error("Failed to login");
       }
     } catch (error) {
       console.error("Error creating account:", error);
-      alert(`Error: ${error.message}`);
+      toast.error("Failed to login");
     }
 
     console.log("Login with", username, password);
@@ -53,15 +53,14 @@ function Login() {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="description-card">
-
           <div className="extra-margin">
             <h3>Login to continue your journey with Consilia.</h3>
           </div>
           <div className="column">
-
             <label>
               Username:&nbsp;
               <input
+                className="input-box"
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -70,6 +69,7 @@ function Login() {
             <label>
               Password:&nbsp;&nbsp;
               <input
+                className="input-box"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -79,7 +79,11 @@ function Login() {
         </div>
         <div className="buttons">
           <div className="start-button">
-            <Link to="/"><button><b>HOME</b></button></Link>
+            <Link to="/">
+              <button>
+                <b>HOME</b>
+              </button>
+            </Link>
           </div>
           <div className="start-button">
             <button type="submit">LOGIN</button>

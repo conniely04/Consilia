@@ -1,0 +1,11 @@
+.bubble-code-input {
+  width: 75%;
+  height: 60%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  background-color: white;
+  color: black;
+}
