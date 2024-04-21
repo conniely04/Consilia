@@ -111,7 +111,7 @@ export default function CreateBubble() {
           <button className="buttontext" onClick={handleReturn}>
             Return to User Home
           </button>
-          <p>Make sure all team members have joined the bubble.</p>
+          <p>Add more friends to join your bubble.</p>
         </div>
       )}
     </div>
