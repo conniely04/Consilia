@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateBubble.css";
 
+let groupId = "";
+
 export default function CreateBubble() {
   const [bubbleName, setBubbleName] = useState("");
   const [isCodeGenerated, setIsCodeGenerated] = useState(false);
@@ -13,15 +15,14 @@ export default function CreateBubble() {
   };
 
   const generateCode = async (event) => {
-    setBubbleCode(Math.floor(100000 + Math.random() * 900000));
-    console.log(bubbleCode);
     event.preventDefault();
-    const newBubbleCode = Math.floor(100000 + Math.random() * 900000);
-    setBubbleCode(newBubbleCode);
+
+    const randInt = Math.floor(100000 + Math.random() * 900000);
+    setBubbleCode(randInt);
 
     const url = "http://localhost:5002/api/friend-groups/create";
     const userId = localStorage.getItem("userId");
-    let groupId = "";
+    
 
     try {
       const response = await fetch(url, {
@@ -46,7 +47,6 @@ export default function CreateBubble() {
       console.error("Error creating account:", error);
       alert(`Error: ${error.message}`);
     }
-    console.log(groupId);
 
     const url2 = `http://localhost:5002/api/friend-groups/${groupId}/bubble-code`;
     try {
@@ -57,7 +57,7 @@ export default function CreateBubble() {
         },
         body: JSON.stringify({
           groupId: groupId,
-          bubbleCode: bubbleCode,
+          bubbleCode: randInt,
         }),
       });
 
@@ -72,11 +72,34 @@ export default function CreateBubble() {
     setIsCodeGenerated(true); // Set isCodeGenerated to true
   };
 
-  const handleReturn = () => {
+  const handleReturn = async () => {
     // Handle returning to user home
     console.log("Returning to user home");
 
-    // Clear bubbleCode and reset isCodeGenerated state
+    //set bubble code back to null
+    const url = `http://localhost:5002/api/friend-groups/${groupId}/bubble-code`;
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          groupId: groupId,
+          bubbleCode: null,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Bubble code updated successfully");
+      } else {
+        throw new Error("Failed to update bubble code");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
+    // reset isCodeGenerated state
     setIsCodeGenerated(false);
     nav("/user-home");
   };

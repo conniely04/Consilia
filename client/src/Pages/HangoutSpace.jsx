@@ -57,25 +57,31 @@ export default function HangoutSpace() {
     fetchHangoutSpace();
   }, []);
 
-  const propogateHangouts = hangoutGroups.map((group, index) => (
-    <div key={index}>
-      <button className="hangout-name">
-        {group.name}
-        <Link to={`/hangouts/${group._id}`} className="hangout-link">
-          <button className="join-button">Join</button>
-        </Link>
-      </button>
-      <hr />
-    </div>
-  ));
+  const propogateHangouts = hangoutGroups && hangoutGroups.length > 0 ? (
+    hangoutGroups.map((group, index) => (
+      <div key={index}>
+        <button className="hangout-name">
+          {group.name}
+          <Link to={`/hangouts/${group._id}`} className="hangout-link">
+            <button className="join-button">Join</button>
+          </Link>
+        </button>
+        <hr />
+      </div>
+    ))
+  ) : (
+    <p>Create a hangout!</p>
+  );
 
   return (
     <div>
       <h1 className="hangout_space_title">
         
       </h1>
-      <hr />
-
+      <hr/>
+      <Link to="/create-hangout">
+          <button className="create_button">Create Hangout</button>
+      </Link>
       <div className="hangouts">{propogateHangouts}</div>
     </div>
   );
