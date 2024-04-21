@@ -8,12 +8,14 @@
   outline: none;
   background-color: white;
   color: black;
+  text-align: center;
 }
 
 .joinbutton {
   color: rgb(13, 65, 30);
   width: 100px;
   font-weight: bold;
+  margin-right: 0px;
 }
 .joinbutton:hover {
   background-color: rgb(227, 255, 237);

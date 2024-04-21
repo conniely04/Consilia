@@ -112,13 +112,13 @@ export default function CreateBubble() {
       {!isCodeGenerated ? (
         <div>
           <div className="enter-bubble-section">
-          <h2>Enter bubble's name</h2>
+          <h2>What would you like to name your bubble?</h2>
           <input
             className="bubble-code-input"
             type="text"
             value={bubbleName}
             onChange={handleChange}
-            placeholder="Enter bubble's name"
+            placeholder="Enter Bubble's name"
           />
           <br />
           <br />
