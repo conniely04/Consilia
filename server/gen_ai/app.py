@@ -72,7 +72,7 @@ def receive_activity_and_generate_options():
     data = request.get_json(force=True)
     activity_name = data.get('activityName')
     preference = data.get('preference')
-    location = data.get('location')
+    location = 'UCLA'
 
     options_text = generate_options(location, {activity_name: preference}, preference)
 

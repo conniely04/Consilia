@@ -20,10 +20,14 @@ router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
 router.post("/hangouts/create", hangoutController.createHangout);
 router.post("/hangouts/join", hangoutController.joinHangout);
 router.post("/activities", activityController.addActivity);
+router.post("/addPreferences", activityController.addPreferences);
 
 //GET REQUESTS
 //displays all users in the database
-router.get('/friend-groups/bubble-code/:bubbleCode', friendGroupController.getFriendGroupByBubbleCode);
+router.get(
+  "/friend-groups/bubble-code/:bubbleCode",
+  friendGroupController.getFriendGroupByBubbleCode
+);
 router.get("/register", async (req, res) => {
   try {
     const users = await User.find({});
@@ -91,6 +95,10 @@ router.get("/friend-groups/:groupId/members", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+router.get(
+  "/hangouts/:friend-group-id",
+  hangoutController.getHangoutsByFriendGroupId
+);
 
 //sending activity name and preference to flask
 
@@ -118,6 +126,40 @@ router.get("/hangouts/:hangoutId/activity", async (req, res) => {
   }
 });
 
-//for real sending the hangout id to flask
+router.post("/update-preferences", async (req, res) => {
+  const { activityId, preferences } = req.body;
+
+  try {
+    // Update the activity with the new preferences
+    const updatedActivity = await Activity.findByIdAndUpdate(
+      activityId,
+      { $set: { preferences: preferences } },
+      { new: true } // Return the updated object
+    );
+
+    if (!updatedActivity) {
+      return res.status(404).send("Activity not found");
+    }
+
+    res.status(200).json(updatedActivity);
+  } catch (error) {
+    console.error("Failed to update activity:", error);
+    res
+      .status(500)
+      .json({ message: "Error updating activity", error: error.message });
+  }
+});
+
+router.post("/preferences", async (req, res) => {
+  const { preferences } = req.body;
+
+  try {
+    console.log("Preferences submitted:", preferences);
+    res.json({ message: "Preferences submitted", preferences });
+  } catch (error) {
+    console.error("Error submitting preferences:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;

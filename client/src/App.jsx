@@ -30,7 +30,11 @@ function App() {
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
           <Route path="/members" element={<MemberList />} />
+<<<<<<< HEAD
           <Route path ="/preferences" element={<Preferences/>}/>
+=======
+          <Route path="/preferences" element={<Preferences />} />
+>>>>>>> 1b45fb7 (merging)
         </Routes>
         <Footer />
       </BrowserRouter>
