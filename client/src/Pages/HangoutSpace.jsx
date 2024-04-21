@@ -45,6 +45,7 @@ export default function HangoutSpace() {
         {group.name} <span className="username"></span>
       </h1>
       <hr />
+
       <div className="hangouts">{propogateHangouts}</div>
     </div>
   );

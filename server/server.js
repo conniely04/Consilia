@@ -10,7 +10,7 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow only your frontend origin
+    origin: "*", // Allow only your frontend origin
   })
 );
 

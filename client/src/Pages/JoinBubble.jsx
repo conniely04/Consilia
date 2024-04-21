@@ -31,7 +31,9 @@ export default function JoinBubble() {
         />
         <br></br>
         <br></br>
-        <button onClick={handleSubmit}>Join</button>
+        <button className="joinbutton" onClick={handleSubmit}>
+          Join
+        </button>
       </div>
     </div>
   );
