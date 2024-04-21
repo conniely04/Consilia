@@ -109,3 +109,23 @@ exports.getFriendGroupHangouts = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.updateBubbleCode = async (req, res) => {
+  try {
+    const { groupId, bubbleCode } = req.body;
+
+    const updatedFriendGroup = await FriendGroup.findByIdAndUpdate(
+      groupId,
+      { bubbleCode: bubbleCode },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedFriendGroup) {
+      return res.status(404).json({ message: "FriendGroup not found" });
+    }
+
+    res.status(200).json(updatedFriendGroup);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

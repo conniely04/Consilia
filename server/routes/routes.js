@@ -32,6 +32,10 @@ router.get("/register", async (req, res) => {
   }
 });
 
+//Put requests
+router.put("/friend-groups/:groupId/bubble-code", friendGroupController.updateBubbleCode);
+
+
 //displays all friend groups in the database
 router.get("/friend-groups", async (req, res) => {
   try {
