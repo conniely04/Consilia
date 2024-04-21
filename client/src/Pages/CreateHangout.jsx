@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./CreateHangout.css";
 
-export default function CreateHangout() {
+export default function CreateHangout(setOptions) {
   const [hangoutName, setHangoutName] = useState("");
   //get from data
   const [createdActivity, setCreatedActivity] = useState(false);
@@ -30,7 +30,10 @@ export default function CreateHangout() {
         }
         return response.json();
       })
-      .then((data) => console.log("Preferences submitted:", data))
+      .then((data) => {
+        console.log("Preferences submitted:", data.options);
+        setOptions(data.options); // Set options in the parent state
+      })
       .catch((error) => console.error("Error submitting preferences:", error));
 
     // Handle the submission, for example, send the hangoutName to your backend
