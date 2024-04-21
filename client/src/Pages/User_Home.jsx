@@ -62,6 +62,7 @@ export default function User_Home() {
         </Link>
       </div>
       <br />
+      <h2 className="small">Your Friend Groups</h2>
       <div className="bubbles">{propogateBubbles}</div>
     </>
   );
