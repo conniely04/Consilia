@@ -1,5 +1,6 @@
 const FriendGroup = require("../schemas/friendgroup");
 const User = require("../schemas/user");
+const Hangout = require("../schemas/hangout");
 
 exports.createFriendGroup = async (req, res) => {
   try {
@@ -65,11 +66,45 @@ exports.joinFriendGroup = async (req, res) => {
 exports.getUserFriendGroups = async (req, res) => {
   try {
     const { userId } = req.params;
-    const friendGroups = await FriendGroup.find({ members: userId }).populate(
-      "members",
-      "username"
-    );
-    res.json(friendGroups);
+    const groups = await FriendGroup.find({ members: userId }) // Find all groups where the user is a member
+      .populate("created_by", "username") // Populate the creator's username
+      .populate("members", "username"); // Populate the usernames of all members
+
+    if (!groups.length) {
+      return res
+        .status(404)
+        .json({ message: "No friend groups found for this user." });
+    }
+
+    res.status(200).json(groups);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getFriendGroupHangouts = async (req, res) => {
+  try {
+    const { friendGroupId } = req.params;
+    const friendGroup = await FriendGroup.findById(friendGroupId)
+      .populate("created_by", "username")
+      .populate("members", "username");
+
+    if (!friendGroup) {
+      return res.status(404).json({ message: "Friend group not found" });
+    }
+
+    // Find hangouts that reference this friend group
+    const hangouts = await Hangout.find({ friendGroup: friendGroupId })
+      .populate("created_by", "username")
+      .populate("participants", "username");
+
+    // Combine the friend group info with its hangouts
+    const response = {
+      friendGroup: friendGroup,
+      hangouts: hangouts,
+    };
+
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

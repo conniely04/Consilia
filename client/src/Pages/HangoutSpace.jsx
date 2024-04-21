@@ -1,28 +1,49 @@
 import { Link, useParams } from "react-router-dom";
 import "./HangoutSpace.css";
+import React, { useState, useEffect } from "react";
 
 export default function HangoutSpace() {
-  const { name, groupIDd } = useParams();
-  const [friendGroup, setFriendGroup] = useState(null);
+  const { userId } = useParams();
+  const [friendGroups, setFriendGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { name } = useParams();
+  useEffect(() => {
+    // Fetch the friend groups when the component mounts
+    const fetchFriendGroups = async () => {
+      try {
+        const response = await fetch(`/api/user/${userId}/friend-groups`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch friend groups");
+        }
+        const data = await response.json();
+        setFriendGroups(data);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const hangouts = ["hangout1", "hangout2", "hangout3"];
-  const propogateHangouts = hangouts.map((hangoutName, index) => (
+    fetchFriendGroups();
+  }, [userId]);
+
+  const propogateHangouts = friendGroups.map((group, index) => (
     <div key={index}>
       <button className="hangout-name">
-        {hangoutName}
-        <Link to={`/${hangoutName}`} className="hangout-link">
-          <button className="join-button">join</button>
+        {group.name}
+        {/* Adjust the route to match your app's routing structure */}
+        <Link to={`/hangouts/${group._id}`} className="hangout-link">
+          <button className="join-button">Join</button>
         </Link>
-
-        <hr />
       </button>
+      <hr />
     </div>
   ));
 
   return (
     <div>
       <h1 className="hangout_space_title">
-        {name} <span className="username">username</span>
+        {group.name} <span className="username"></span>
       </h1>
       <hr />
       <div className="hangouts">{propogateHangouts}</div>
