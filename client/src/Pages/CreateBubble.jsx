@@ -44,11 +44,9 @@ export default function CreateBubble() {
     }
     console.log(groupId);
 
-    setIsCodeGenerated(true); // Set isCodeGenerated to true
-
     const url2 = `http://localhost:5002/api/friend-groups/${groupId}/bubble-code`;
     try {
-      const response = await fetch(url, {
+      const response = await fetch(url2, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -67,6 +65,7 @@ export default function CreateBubble() {
     } catch (error) {
       console.error("Error:", error);
     }
+    setIsCodeGenerated(true); // Set isCodeGenerated to true
   };
 
   const handleReturn = () => {
