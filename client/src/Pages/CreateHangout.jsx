@@ -7,7 +7,7 @@ export default function CreateHangout(setOptions) {
   const [hangoutName, setHangoutName] = useState("");
   //get from data
   const [createdActivity, setCreatedActivity] = useState(false);
-  const [preferences, setPreferences] = useState(Array(3).fill(""));
+  const [preferences, setPreferences] = useState(["", "", ""]);
   const [activityName, setActivityName] = useState("");
   const [activityText, setActivityText] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate
@@ -21,7 +21,7 @@ export default function CreateHangout(setOptions) {
       },
       body: JSON.stringify({
         activityName: hangoutName,
-        preferences: preferences,
+        preferences: preferences
       }),
     })
       .then((response) => {
@@ -52,22 +52,7 @@ export default function CreateHangout(setOptions) {
     navigate(-1);
   };
 
-  const isAddActivity = () => {
-    console.log(createdActivity);
-    if (createdActivity) {
-      return (
-        <div className="start-button">
-          {/* <button onClick={handleFinish}>FINISH</button> */}
-        </div>
-      );
-    } else {
-      return (
-        <div className="start-button">
-          <button onClick={handleBack}>RETURN</button>
-        </div>
-      );
-    }
-  };
+
 
   return (
     <>
@@ -97,18 +82,47 @@ export default function CreateHangout(setOptions) {
       <div className="input-bar">
         <input
           type="text"
-          value={preferences}
-          onChange={(e) => setPreferences(e.target.value)}
+          value={preferences[0]}
+          onChange={(e) => {
+            const newPreferences = [...preferences];
+            newPreferences[0] = e.target.value;
+            setPreferences(newPreferences);
+          }}
           placeholder="Enter your preferences here..."
         />
       </div>
       <br />
+      <div className="input-bar">
+        <input
+          type="text"
+          value={preferences[1]}
+          onChange={(e) => {
+            const newPreferences = [...preferences];
+            newPreferences[1] = e.target.value;
+            setPreferences(newPreferences);
+          }}
+          placeholder="Enter your preferences here..."
+        />
+      </div>
+      <br />
+      <div className="input-bar">
+        <input
+          type="text"
+          value={preferences[2]}
+          onChange={(e) => {
+            const newPreferences = [...preferences];
+            newPreferences[2] = e.target.value;
+            setPreferences(newPreferences);
+          }}
+          placeholder="Enter your preferences here..."
+        />
+      </div>
       <div className="buttons">
         <div className="start-button">
           <button onClick={handleBack}>Return Home</button>
         </div>
         <div className="start-button">
-          <button onClick={handleSubmission}>Submit</button>
+          <button onClick={handleSubmit}>&nbsp;&nbsp;&nbsp;&nbsp;Submit&nbsp;&nbsp;&nbsp;&nbsp; </button>
         </div>
       </div>
     </>

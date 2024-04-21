@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./Preference.css";
 import { useLocation } from "react-router-dom";
 
 export default function Results(options) {
