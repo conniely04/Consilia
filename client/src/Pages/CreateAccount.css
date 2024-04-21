@@ -1,0 +1,20 @@
+.create-account-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column input {
+    margin: 3px 1px 3px 1px;
+}
+
+
+
+.extra-margin {
+    margin: 0em 3em 0em 3em;
+}
+

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import './CreateAccount.css';  // Assume you have styles defined in CreateAccount.css
+import './CreateAccount.css';  // Assume you have styles defined in CreateAccount.css
 
 function CreateAccount() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     fullName: "",
@@ -53,37 +53,52 @@ function CreateAccount() {
 
   return (
     <div className="create-account-container">
+
+      <div className="title-name">
+        <h1>🍃Consilia🍃</h1>
+      </div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          fullName:
-          <input
-            name="fullName"
-            type="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </label>
-        <div className="start-button">
-          <button type="submit">Create Account</button>
+        <div className="description-card">
+
+          <div className="extra-margin">
+            <h3>Create an account to start your journey with Consilia.</h3>
+          </div>
+          <div className="column">
+            <label>
+              Full Name:&nbsp;
+              <input
+                name="fullName"
+                type="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Username:&nbsp;
+
+              <input
+                name="username"
+                type="text"
+                value={formData.username}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Password:&nbsp;&nbsp;
+              <input
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
         </div>
+
+        <div className="start-button">
+          <button type="submit">CREATE ACCOUNT</button>
+        </div>
+
       </form>
     </div>
   );
