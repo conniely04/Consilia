@@ -2,15 +2,63 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 import json
 from flask_cors import CORS
-CORS(app)
 import google.generativeai as genai
 from dotenv import load_dotenv
 import sys
 import os
+import requests
 load_dotenv()
+CORS(app, resources={r"/*": {"origins": '*'}})
 API_KEY = os.getenv("API_KEY")
 
 genai.configure(api_key=API_KEY)
+
+@app.route('/receive-activity', methods=['POST'])
+def receive_activity():
+    data = request.get_json()
+    activity_name = data.get('activityName')
+    preferences_list = data.get('preferences')
+
+    print(f"Received activity name: {activity_name}")
+    print(f"Received preferences: {preferences_list}")
+
+    # Assume location is a fixed value or retrieved from somewhere else
+    location = "UCLA"
+
+    # Convert the list of preferences into a dictionary
+    # with activity names as keys and preference lists as values
+    activities = {activity_name: preferences_list}
+
+    # Call the generate_options function
+    options = generate_options(location, activities, preferences_list)
+
+    # Return the generated options
+    return jsonify({"message": "Data received successfully", "options": options})
+
+
+@app.route('/generate-options', methods=['POST'])
+def receive_activity_and_generate_options():
+    data = request.get_json(force=True)
+    activity_name = data.get('activityName')
+    preference = data.get('preference')
+    location = 'UCLA'
+
+    options_text = generate_options(location, {activity_name: preference}, preference)
+    print(Response(options_text, mimetype='application/json'))
+
+    # Node.js/Express server endpoint
+    node_endpoint = 'http://localhost:5003/results'
+    
+    # Send a POST request to the Node.js/Express server
+    node_response = requests.post(node_endpoint, json={"optionsText": options_text})
+    
+    # Check if the request was successful   Response(options_text, mimetype='application/json')
+    if node_response.status_code == 200:
+        return jsonify({"message": "Data sent successfully"})
+    else:
+        return Response("Failed to send data to Node.js server", status=500)
+
+
 
 def generate_options(location, activities, preferences):
     # Set up the model
@@ -66,24 +114,16 @@ def generate_options(location, activities, preferences):
     return (response.text)
 from flask import Flask, request, jsonify, Response
 
-@app.route('/generate-options', methods=['POST'])
-def receive_activity_and_generate_options():
-    # Force JSON parsing even if the Content-Type header is not set to application/json
-    data = request.get_json(force=True)
-    activity_name = data.get('activityName')
-    preference = data.get('preference')
-    location = 'UCLA'
-
-    options_text = generate_options(location, {activity_name: preference}, preference)
-
-    return Response(options_text, mimetype='application/json')
 
 
+
+#
 
 
 @app.route('/')
-def index():
-    return jsonify({'message': 'Hello, World!'})
+def hello_world():
+    return 'Hello, World!'
+
 
 
 if __name__ == '__main__':

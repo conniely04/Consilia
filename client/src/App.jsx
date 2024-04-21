@@ -12,7 +12,7 @@ import User_Home from "./Pages/User_Home.jsx";
 import HangoutSpace from "./Pages/HangoutSpace.jsx";
 import JoinBubble from "./Pages/JoinBubble.jsx";
 import CreateBubble from "./Pages/CreateBubble.jsx";
-import Recommendations from "./Pages/Recommendations.jsx";
+import Results from "./Pages/Results.jsx";
 
 function App() {
   return (
@@ -28,7 +28,8 @@ function App() {
           <Route path="/join-bubble" element={<JoinBubble />} />
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
-          <Route path ="/recommendations" element ={<Recommendations/>}/>
+          <Route path="/members" element={<MemberList />} />
+          <Route path="/results" element={<Results />} />
         </Routes>
         <Footer />
       </BrowserRouter>

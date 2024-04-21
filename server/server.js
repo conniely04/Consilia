@@ -47,12 +47,12 @@ app.post("/send-activity", async (req, res) => {
     const response = await axios.post(
       "http://127.0.0.1:5003/receive-activity",
       {
-        activityName,
-        preference,
+        activityName: activityName,
+        preference: preference,
       }
     );
 
-    res.json(response.data);
+    res.json(response);
   } catch (error) {
     console.error(
       "Error:",
@@ -62,6 +62,14 @@ app.post("/send-activity", async (req, res) => {
       .status(500)
       .json({ error: "Something went wrong", details: error.message });
   }*/
+});
+
+app.post("/results", (req, res) => {
+  const optionsText = req.body.optionsText;
+  console.log("Received options text:", optionsText);
+
+  // Process the optionsText as needed
+  res.status(200).json({ message: "Options received successfully" });
 });
 
 //endpoints
