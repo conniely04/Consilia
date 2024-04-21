@@ -58,7 +58,7 @@ export default function User_Home() {
             </div>
             <div className="buttons">
                 <Link to="/join-bubble"><button className="join_button" style={{ marginRight: '30px' }}>Join Bubble</button ></Link>
-                <button className="create_button">Create Bubble</button>
+                <Link to="/create-bubble"><button className="create_button">Create Bubble</button></Link>
             </div>
             <br />
             <div className="bubbles">
