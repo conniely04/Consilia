@@ -69,10 +69,6 @@ export default function CreateHangout() {
             </div>
 
             <div className="buttons">
-
-                {/* <div className="start-button">
-                    <button onClick={handleBack}>RETURN</button>
-                </div> */}
                 <div>
                     {isAddActivity()}
                 </div >
