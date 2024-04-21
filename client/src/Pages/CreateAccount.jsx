@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './CreateAccount.css';  // Assume you have styles defined in CreateAccount.css
 
 function CreateAccount() {
@@ -94,9 +94,13 @@ function CreateAccount() {
             </label>
           </div>
         </div>
-
-        <div className="start-button">
-          <button type="submit">CREATE ACCOUNT</button>
+        <div className="buttons">
+          <div className="start-button">
+            <Link to="/"><button><b>HOME</b></button></Link>
+          </div>
+          <div className="start-button">
+            <button type="submit">CREATE ACCOUNT</button>
+          </div>
         </div>
 
       </form>

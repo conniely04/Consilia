@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate, Link } from "react-router-dom"; // Import useNavigate
 // import './Login.css';  // Assume you have styles defined in Login.css
 
 function Login() {
@@ -77,8 +77,13 @@ function Login() {
             </label>
           </div>
         </div>
-        <div className="start-button">
-          <button type="submit">LOGIN</button>
+        <div className="buttons">
+          <div className="start-button">
+            <Link to="/"><button><b>HOME</b></button></Link>
+          </div>
+          <div className="start-button">
+            <button type="submit">LOGIN</button>
+          </div>
         </div>
       </form>
     </div>
