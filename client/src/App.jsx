@@ -33,10 +33,6 @@ function App() {
           <Route path="/join-bubble" element={<JoinBubble />} />
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
-<<<<<<< HEAD
-=======
-          {/* <Route path="/members" element={<MemberList />} /> */}
->>>>>>> a4780cf8e3675db059e3d887d4df3aa8b53b8802
           <Route path="/results" element={<Results options={options} />} />
         </Routes>
         <Footer />

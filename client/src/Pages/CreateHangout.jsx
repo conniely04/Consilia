@@ -125,7 +125,7 @@ export default function CreateHangout() {
           <button onClick={handleBack}>Return Home</button>
         </div>
         <div className="start-button">
-          <button onClick={handleSubmission}>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
         </div>
       </div>
     </>
