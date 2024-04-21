@@ -49,7 +49,7 @@ export default function User_Home() {
   return (
     <>
       <div className="user_home_title">
-        <h1>Friend Bubbles</h1>
+        <h1>🫧Friend Bubbles🫧</h1>
       </div>
       <div className="buttons">
         <Link to="/join-bubble">
@@ -62,7 +62,10 @@ export default function User_Home() {
         </Link>
       </div>
       <br />
-      <div className="bubbles">{propogateBubbles}</div>
+      <div className="friend-group-section">
+        <h2 className="small"><u>Current Friend Bubbles</u></h2>
+        <div className="bubbles">{propogateBubbles}</div>
+      </div>
     </>
   );
 }
