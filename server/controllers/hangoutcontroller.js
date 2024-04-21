@@ -11,24 +11,8 @@ exports.createHangout = async (req, res) => {
       participants: [userId],
     });
     await newHangout.save();
+
     res.status(201).json(newHangout);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-exports.getHangout = async (req, res) => {
-  try {
-    const { hangoutId } = req.params;
-    const hangout = await Hangout.findById(hangoutId)
-      .populate("created_by", "username")
-      .populate("participants", "username");
-
-    if (!hangout) {
-      return res.status(404).json({ message: "Hangout not found" });
-    }
-
-    res.status(200).json(group);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -43,20 +27,68 @@ exports.joinHangout = async (req, res) => {
       return res.status(404).json({ message: "Hangout not found" });
     }
 
+    // Ensure participants array is initialized
+    if (!hangout.participants || !Array.isArray(hangout.participants)) {
+      hangout.participants = [];
+    }
+
     if (hangout.participants.includes(userId)) {
       return res
         .status(400)
         .json({ message: "User already a member of this hangout" });
     }
 
-    // Add the user to the group
     hangout.participants.push(userId);
-    await group.save();
+    await hangout.save();
 
     res
       .status(200)
-      .json({ message: "User added to the hangout successfully", group });
+      .json({ message: "User added to the hangout successfully", hangout });
   } catch (error) {
+    console.error("Error joining hangout:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+//test get all hangouts
+exports.getAllHangouts = async (req, res) => {
+  try {
+    const hangouts = await Hangout.find({})
+      .populate("created_by", "username") // Populating just the username of the creator
+      .populate("participants", "username") // Populating usernames of all participants
+      .populate({
+        path: "friendGroup",
+        select: "name members", // Selecting to show only the name and members of the friend group
+        populate: {
+          path: "members",
+          select: "username", // Further populating the usernames of the members in the friend group
+        },
+      })
+      .populate({
+        path: "activities",
+        select: "name description", // Selecting fields of activities to show
+      });
+
+    res.status(200).json(hangouts);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getHangout = async (req, res) => {
+  try {
+    const { hangoutId } = req.params; // Extracting hangoutId from the URL parameter
+    const hangout = await Hangout.findById(hangoutId)
+      .populate("created_by", "username") // Assuming 'created_by' stores a reference to a User document
+      .populate("participants", "username"); // Populate all participants' usernames
+
+    if (!hangout) {
+      return res.status(404).json({ message: "Hangout not found" });
+    }
+
+    res.status(200).json(hangout);
+  } catch (error) {
+    console.error("Error fetching hangout:", error);
     res.status(500).json({ error: error.message });
   }
 };

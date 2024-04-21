@@ -15,6 +15,9 @@ router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 router.post("/friend-groups/create", friendGroupController.createFriendGroup);
 router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
+router.post("/hangouts/create", hangoutController.createHangout);
+router.post("/hangouts/join", hangoutController.joinHangout);
+router.post("/activities", activityController.addActivity);
 
 //GET REQUESTS
 //displays all users in the database
@@ -44,19 +47,22 @@ router.get("/friend-groups", async (req, res) => {
 });
 
 //FRONTEND USE THIS TO DISPLAY FRIEND GROUPS for all users
-//router.get("/friend-groups/:groupId", friendGroupController.getFriendGroup);
 router.get("/friend-groups/:userId", friendGroupController.getUserFriendGroups);
-router.get("/user/");
+router.get("/friend-groups/:groupId", friendGroupController.getFriendGroup);
+//get user friend group
+router.get(
+  "/user/:userId/friend-groups",
+  friendGroupController.getUserFriendGroups
+);
+//get hangout
+router.get(
+  "/friend-groups/:friendGroupId/hangouts",
+  friendGroupController.getFriendGroupHangouts
+);
 
-router.get("/hangouts", async (req, res) => {
-  try {
-    const hangouts = await Hangout.find({});
-    console.log(hangouts); // This will print the hangouts to the console
-    res.json(hangouts); // This sends the hangouts to the client
-  } catch (error) {
-    console.error("Failed to fetch hangouts:", error);
-    res.status(500).json({ message: "Failed to fetch hangouts", error: error });
-  }
-});
+//get specific hangout
+router.get("/hangouts/:hangoutId", hangoutController.getHangout);
+
+router.get("/hangouts", hangoutController.getAllHangouts);
 
 module.exports = router;
