@@ -6,23 +6,23 @@ export default function HangoutSpace() {
   const { name, groupId } = useParams();
   const [friendGroup, setFriendGroup] = useState(null);
 
-  useEffect(() => {
-    // Fetch friend group details from the server
-    const fetchFriendGroup = async () => {
-      try {
-        const response = await fetch(`/api/friend-groups/${groupId}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch friend group details.");
-        }
-        const data = await response.json();
-        setFriendGroup(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+  //   useEffect(() => {
+  //     // Fetch friend group details from the server
+  //     const fetchFriendGroup = async () => {
+  //       try {
+  //         const response = await fetch(`/api/friend-groups/${groupId}`);
+  //         if (!response.ok) {
+  //           throw new Error("Failed to fetch friend group details.");
+  //         }
+  //         const data = await response.json();
+  //         setFriendGroup(data);
+  //       } catch (error) {
+  //         console.error("Error:", error);
+  //       }
+  //     };
 
-    fetchFriendGroup();
-  }, [groupId]);
+  //     fetchFriendGroup();
+  //   }, [groupId]);
 
   const hangouts = ["hangout1", "hangout2", "hangout3"];
   const propogateHangouts = hangouts.map((hangoutName, index) => (
