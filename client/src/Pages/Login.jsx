@@ -44,23 +44,35 @@ function Login() {
 
   return (
     <div className="login-container">
+      <div className="title-name">
+        <h1>🍃Consilia🍃</h1>
+      </div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+        <div className="description-card">
+
+          <div className="extra-margin">
+            <h3>Login to continue your journey with Consilia.</h3>
+          </div>
+          <div className="column">
+
+            <label>
+              Username:&nbsp;
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </label>
+            <label>
+              Password:&nbsp;&nbsp;
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+          </div>
+        </div>
         <div className="start-button">
           <button type="submit">LOGIN</button>
         </div>
