@@ -18,3 +18,10 @@
 .joinbutton:hover {
   background-color: rgb(227, 255, 237);
 }
+
+.enter-bubble-section {
+  background-color: #1c7445;
+  padding: 5px 75px 0px 75px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}

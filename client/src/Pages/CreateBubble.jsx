@@ -107,10 +107,11 @@ export default function CreateBubble() {
   return (
     <div>
       <div>
-        <h1>Create Bubble</h1>
+        <h1>🫧Create Bubble🫧</h1>
       </div>
       {!isCodeGenerated ? (
         <div>
+          <div className="enter-bubble-section">
           <h2>Enter bubble's name</h2>
           <input
             className="bubble-code-input"
@@ -121,6 +122,7 @@ export default function CreateBubble() {
           />
           <br />
           <br />
+          </div>
           <button className="joinbutton" onClick={generateCode}>
             Create
           </button>
