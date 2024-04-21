@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./JoinBubble.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Import toast
 
 export default function JoinBubble() {
   const [bubbleCode, setBubbleCode] = useState(""); // State to store the input value
-  const nav=useNavigate();
+  const nav = useNavigate();
 
   const handleChange = (event) => {
     setBubbleCode(event.target.value); // Update bubbleCode state with input value
@@ -13,62 +14,56 @@ export default function JoinBubble() {
   const handleSubmit = async (event) => {
     // Handle form submission, e.g., send bubbleCode to backend
     console.log("Bubble code submitted:", bubbleCode);
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
 
     let url = `http://localhost:5002/api/friend-groups/bubble-code/${bubbleCode}`;
-      try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log("Successfully got friend groups", result);
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Successfully got friend groups", result);
 
-            if (result._id) {
-       
-                const url2 = `http://localhost:5002/api/friend-groups/join`;
-                try {
+        if (result._id) {
+          const url2 = `http://localhost:5002/api/friend-groups/join`;
+          try {
+            const response2 = await fetch(url2, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                groupId: result._id,
+                userId: userId,
+              }),
+            });
 
-                    const response2 = await fetch(url2, {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        groupId: result._id,
-                        userId: userId,
-                      }),
-                    });
-
-                    if(response2.ok){
-                        console.log("Successfully joined group")
-                        nav('/user-home');
-                    }
-                    
-                }catch(error){
-                    console.error("Error joining group:", error);
-
-                }
-            } else {
-  
-                throw new Error("No match with friend group");
+            if (response2.ok) {
+              console.log("Successfully joined group");
+              toast.success("Successfully joined group");
+              nav("/user-home");
             }
-
+          } catch (error) {
+            console.error("Error joining group:", error);
+            toast.error("Failed to join group");
+          }
         } else {
-
-            throw new Error("No match with friend group");
+          throw new Error("No match with friend group");
         }
-      } catch (error) {
-        console.error("Error:", error);
+      } else {
+        throw new Error("No match with friend group");
       }
+    } catch (error) {
+      console.error("Error:", error);
+    }
 
     setBubbleCode("");
-    
-};
+  };
 
   return (
     <div>
