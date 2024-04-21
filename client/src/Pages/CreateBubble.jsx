@@ -4,9 +4,9 @@ import "./CreateBubble.css";
 
 export default function CreateBubble() {
   const [bubbleName, setBubbleName] = useState("");
-  const [bubbleCode, setBubbleCode] = useState("");
   const [isCodeGenerated, setIsCodeGenerated] = useState(false);
   const nav = useNavigate();
+  const bubbleCode = Math.floor(100000 + Math.random() * 900000);
 
   const handleChange = (event) => {
     setBubbleName(event.target.value);
@@ -14,8 +14,6 @@ export default function CreateBubble() {
 
   const generateCode = async (event) => {
     event.preventDefault();
-    // Generate 6-digit random code
-    // const code = Math.floor(100000 + Math.random() * 900000);
 
     const url = "http://localhost:5002/api/friend-groups/create";
     const userId = localStorage.getItem("userId");
@@ -46,8 +44,6 @@ export default function CreateBubble() {
     }
     console.log(groupId);
 
-    const code = 666666;
-    setBubbleCode(code.toString()); // Update bubbleCode state with generated code
     setIsCodeGenerated(true); // Set isCodeGenerated to true
 
     const url2 = `http://localhost:5002/api/friend-groups/${groupId}/bubble-code`;
@@ -78,7 +74,6 @@ export default function CreateBubble() {
     console.log("Returning to user home");
 
     // Clear bubbleCode and reset isCodeGenerated state
-    setBubbleCode("");
     setIsCodeGenerated(false);
     nav("/user-home");
   };
