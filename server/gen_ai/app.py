@@ -1,7 +1,12 @@
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+import json
+from flask_cors import CORS
+CORS(app)
 import google.generativeai as genai
 from dotenv import load_dotenv
+import sys
 import os
-
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
@@ -58,22 +63,28 @@ def generate_options(location, activities, preferences):
 
 
     response = model.generate_content(prompt_parts)
-    return response.text
+    return (response.text)
+from flask import Flask, request, jsonify, Response
+
+@app.route('/generate-options', methods=['POST'])
+def receive_activity_and_generate_options():
+    # Force JSON parsing even if the Content-Type header is not set to application/json
+    data = request.get_json(force=True)
+    activity_name = data.get('activityName')
+    preference = data.get('preference')
+    location = data.get('location')
+
+    options_text = generate_options(location, {activity_name: preference}, preference)
+
+    return Response(options_text, mimetype='application/json')
 
 
-# Example usage with hangout data
-hangout_data = {
-    "food": {"preferences": "asian, american brunch, cheap"},
-    "sports": {"preferences": "outdoor, soccer, nearby"},
-    "movies": {"preferences": "recent releases, comedy, theater"}
-}
 
-location = "UCLA Pauley"
 
-# Extract preferences from hangout_data
-preferences = {activity: data["preferences"] for activity, data in hangout_data.items()}
+@app.route('/')
+def index():
+    return jsonify({'message': 'Hello, World!'})
 
-# Generate options based on hangout data
-options = generate_options(location, hangout_data, preferences)
 
-print(options)
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5003)

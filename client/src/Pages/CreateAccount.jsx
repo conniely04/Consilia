@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import './CreateAccount.css';  // Assume you have styles defined in CreateAccount.css
+import "./CreateAccount.css"; // Assume you have styles defined in CreateAccount.css
+import { toast } from "react-toastify"; // Import toast
 
 function CreateAccount() {
   const navigate = useNavigate();
@@ -38,14 +39,14 @@ function CreateAccount() {
       if (response.ok) {
         const result = await response.json();
         console.log("Account created successfully:", result);
-        alert("Account created successfully!");
-        navigate('/');
+        toast.success("Account created successfully");
+        navigate("/");
       } else {
         throw new Error("Failed to create account");
       }
     } catch (error) {
       console.error("Error creating account:", error);
-      alert(`Error: ${error.message}`);
+      toast.error("Failed to create account");
     }
 
     console.log("Create account with", formData);
@@ -53,13 +54,11 @@ function CreateAccount() {
 
   return (
     <div className="create-account-container">
-
       <div className="title-name">
         <h1>🍃Consilia🍃</h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="description-card">
-
           <div className="extra-margin">
             <h3>Create an account to start your journey with Consilia.</h3>
           </div>
@@ -75,7 +74,6 @@ function CreateAccount() {
             </label>
             <label>
               Username:&nbsp;
-
               <input
                 name="username"
                 type="text"
@@ -96,13 +94,16 @@ function CreateAccount() {
         </div>
         <div className="buttons">
           <div className="start-button">
-            <Link to="/"><button><b>HOME</b></button></Link>
+            <Link to="/">
+              <button>
+                <b>HOME</b>
+              </button>
+            </Link>
           </div>
           <div className="start-button">
             <button type="submit">CREATE ACCOUNT</button>
           </div>
         </div>
-
       </form>
     </div>
   );
