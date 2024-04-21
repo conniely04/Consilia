@@ -40,6 +40,9 @@ app.use("/api", userRoutes);
 app.post("/send-activity", async (req, res) => {
   const { activityName, preference } = req.body;
 
+  const url = "http://127.0.0.1:5003/receive-activity"
+  
+  /*
   try {
     const response = await axios.post(
       "http://127.0.0.1:5003/receive-activity",
@@ -58,7 +61,7 @@ app.post("/send-activity", async (req, res) => {
     res
       .status(500)
       .json({ error: "Something went wrong", details: error.message });
-  }
+  }*/
 });
 
 //endpoints
