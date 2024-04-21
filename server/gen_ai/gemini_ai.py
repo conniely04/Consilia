@@ -1,8 +1,8 @@
 import google.generativeai as genai
 
-genai.configure(api_key="YOUR_API_KEY")
+genai.configure(api_key="AIzaSyCQWSty9IvpQcOV-n3bfYVxUzjjHIcKyzg")
 
-def generate_options(hangout):
+def generate_options(location,activities,preferences):
     # Set up the model
     #hangout --> particpants -->
 
@@ -40,9 +40,9 @@ def generate_options(hangout):
 
     prompt_parts = [f"Current users are at: {location}"]
     
-    for activity in hangout.activities.items():
-        prompt_parts.append(f"Activity is: {activity}")
-        prompt_parts.append(f"The preferences for this activity are: {hangout.activity.preferences}")
+    for activity in activities.items():
+        prompt_parts.append(f"Activity is: {activities}")
+        prompt_parts.append(f"The preferences for this activity are: {preferences}")
         
     prompt_parts.append("Hangout options that mesh together all the parameters.")
 
