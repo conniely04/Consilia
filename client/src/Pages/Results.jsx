@@ -4,13 +4,24 @@ import { useLocation } from "react-router-dom";
 export default function Results(options) {
   const [results, setResults] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
-    // Define the function inside the effect
     const storedOptions = localStorage.getItem("optionsData");
+
+    // Define the function inside the effect
     if (storedOptions) {
-      setResults(JSON.parse(storedOptions)); // Parse the stored string back into an object
+      const descriptionRegex =
+        /"[^"]*description"\s*:\s*"[^"]*"(,)?|"[^"]*"\s*:\s*"user's input"(,)?/g;
+
+      let cleanedString = storedOptions.replace(descriptionRegex, "");
+
+      const trailingCommaRegex = /,(\s*"?[^"]*"?\s*[:}])/g;
+      cleanedString = cleanedString.replace(trailingCommaRegex, "$1");
+
+      const leadingCommaRegex = /([{,]\s*),/g;
+      cleanedString = cleanedString.replace(leadingCommaRegex, "$1");
+
+      setResults(JSON.parse(cleanedString));
     }
 
     const getOptions = async () => {

@@ -67,7 +67,6 @@ def generate_options(location, activities, preferences):
         "top_p": 0.95,
         "top_k": 0,
         "max_output_tokens": 7000,
-        "response_mime_type": "application/json",
 
     }
 

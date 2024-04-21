@@ -22,7 +22,7 @@ export default function CreateHangout() {
       },
       body: JSON.stringify({
         activityName: hangoutName,
-        preferences: preferences
+        preferences: preferences,
       }),
     })
       .then((response) => {
@@ -54,8 +54,6 @@ export default function CreateHangout() {
   const handleBack = () => {
     navigate(-1);
   };
-
-
 
   return (
     <>
