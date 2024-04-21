@@ -10,3 +10,8 @@
   color: black;
 }
 
+.spacing-between {
+  display: flex;
+  gap: 20px; /* Adjust the space as needed */
+  justify-content: center;
+}

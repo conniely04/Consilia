@@ -7,7 +7,7 @@ export default function HangoutSpace() {
   const [hangoutGroups, setHangoutGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const { bubbleId } = useParams();
-  
+
   /*
   useEffect(() => {
     // Fetch the friend groups when the component mounts
@@ -61,33 +61,40 @@ export default function HangoutSpace() {
   const propogateHangouts = hangoutGroups && hangoutGroups.length > 0 ? (
     hangoutGroups.hangouts.map((hangout, index) => (
       <>
-      {console.log("reach")}
-      
-      <div key={index}>
-        <button className="hangout-name">
-          {hangout.title}
-          <Link to={`/hangouts/${group._id}`} className="hangout-link">
-            <button className="join-button">Join</button>
-          </Link>
-        </button>
-        <hr />
-      </div>
+        {console.log("reach")}
+
+        <div key={index}>
+          <button className="hangout-name">
+            {hangout.title}
+            <Link to={`/hangouts/${group._id}`} className="hangout-link">
+              <button className="join-button">Join</button>
+            </Link>
+          </button>
+          <hr />
+        </div>
       </>
     ))
   ) : (
-    <p>Create a hangout!</p>
+    <p>Create your first hangout!</p>
   );
 
   return (
     <div>
       <h1 className="hangout_space_title">
-        <p>Hangout space</p>
-        
+        <p>😊Hangout space😊</p>
       </h1>
-      <hr/>
-      <Link to="/create-hangout">
+      {/* <hr /> */}
+      <div className="hangout-description-card">
+        Hangouts are a great way to connect with your friends and family. Create a hangout to get started!
+      </div>
+      <br />
+      <div className="spacing-between">
+        <Link to="/user-home">
+          <button className="create_button">Return Home</button>
+        </Link>
+        <Link to="/create-hangout">
           <button className="create_button">Create Hangout</button>
-      </Link>
+        </Link></div>
       <div className="hangouts">{propogateHangouts}</div>
     </div>
   );
