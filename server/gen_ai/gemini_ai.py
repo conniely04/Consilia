@@ -1,6 +1,11 @@
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
 
-genai.configure(api_key="AIzaSyCQWSty9IvpQcOV-n3bfYVxUzjjHIcKyzg")
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
+
+genai.configure(api_key=API_KEY)
 
 def generate_options(location, activities, preferences):
     # Set up the model
