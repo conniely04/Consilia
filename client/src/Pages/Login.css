@@ -1,0 +1,35 @@
+.input-box {
+  background-color: #ffffff;
+  color: black;
+  border: 1.5px solid #527047;
+  width: 40%;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  /* Define a linear gradient background with your chosen colors */
+  background: linear-gradient(50deg, #2c4331, #79c480, #e5ebe8);
+
+  /* Set the background size to be twice as wide and tall as the screen to see the movement */
+  background-size: 200% 200%;
+
+  /* Set up the animation */
+  animation: moveBackground 10s ease infinite;
+}
+
+/* Make sure your content is not hidden by the background animation */
+.content {
+  position: relative;
+  z-index: 1;
+}
