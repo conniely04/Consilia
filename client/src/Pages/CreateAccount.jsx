@@ -19,7 +19,7 @@ function CreateAccount() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle account creation logic here
-    const url = "http://localhost:5001/api/register";
+    const url = "http://localhost:5002/api/register";
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -79,8 +79,7 @@ function CreateAccount() {
           />
         </label>
         <div className="start-button">
-
-        <button type="submit">Create Account</button>
+          <button type="submit">Create Account</button>
         </div>
       </form>
     </div>

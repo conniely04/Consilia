@@ -35,7 +35,7 @@ exports.getHangout = async (req, res) => {
 };
 
 exports.joinHangout = async (req, res) => {
-  const { hangoutId, userId } = req.body; 
+  const { hangoutId, userId } = req.body;
 
   try {
     const hangout = await Hangout.findById(hangoutId);
@@ -60,4 +60,3 @@ exports.joinHangout = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
