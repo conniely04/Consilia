@@ -54,7 +54,7 @@ def receive_activity_and_generate_options():
     
     # Check if the request was successful   Response(options_text, mimetype='application/json')
     if node_response.status_code == 200:
-        return jsonify({"message": "Data sent successfully"})
+        return Response(options_text, mimetype='application/json')
     else:
         return Response("Failed to send data to Node.js server", status=500)
 

@@ -62,7 +62,7 @@ app.post("/send-activity", async (req, res) => {
 });
 
 app.post("/results", (req, res) => {
-  const optionsText = req.body.optionsText;
+  const optionsText = req;
   console.log("Received options text:", optionsText);
 
   // Process the optionsText as needed
