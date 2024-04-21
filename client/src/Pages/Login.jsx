@@ -31,6 +31,10 @@ function Login() {
 
         // Redirect to user_home after successful login
         navigate("/user-home");
+
+        localStorage.setItem('userId', result.userId);
+        //const userId = localStorage.getItem('userId');
+
       } else {
         throw new Error("Failed to login");
       }

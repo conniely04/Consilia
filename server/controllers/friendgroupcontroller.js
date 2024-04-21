@@ -64,6 +64,7 @@ exports.joinFriendGroup = async (req, res) => {
 
 exports.getUserFriendGroups = async (req, res) => {
   try {
+    console.log('imhere')
     const { userId } = req.params;
     const friendGroups = await FriendGroup.find({ members: userId }).populate(
       "members",

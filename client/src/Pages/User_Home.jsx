@@ -1,28 +1,55 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./User_Home.css";
 
 export default function User_Home() {
-    const nameBubbles = ["team1", 'team2', 'team3']; //replace w database info
+    //const nameBubbles = ["team1", 'team2', 'team3']; //replace w database info
+    const [friendGroups, setFriendGroups] = useState([]);
 
-    // bubble data format: bubble name: participants (names)
 
+    useEffect(() => {
+        const fetchFriendGroups = async () => {
 
-    const propogateBubbles = nameBubbles.map((bubbleName, index) => (
+            const userId = localStorage.getItem('userId');
+            const url = `http://localhost:5002/api/friend-groups/${userId}`;
+            console.log(userId)
+            
+            try {
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+        
+                if (response.ok) {
+                    const result = await response.json();
+                    setFriendGroups(result)
+                    console.log("Successfully got friend groups", result);
+                } else {
+                    throw new Error("Failed to get friend groups");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        };
+    
+        fetchFriendGroups();
+    }, []);
+
+    const propogateBubbles = friendGroups.map((friendGroup, index) => (
         <div key={index}>
-            <Link to={`/bubbles/${bubbleName}`} className="bubble-link">
+            <Link to={`/bubbles/${friendGroup.name}`} className="bubble-link">
                 <button className="bubble-button"  >
-                    {bubbleName}
-                    <span className="bubble-name" >#ppl</span>
+                    {friendGroup.name}
+                    <span className="bubble-name" >{friendGroup.members.length}</span>
                     <hr />
                 </button>
             </Link>
         </div>
 
     ));
-
-
 
     return (
 
