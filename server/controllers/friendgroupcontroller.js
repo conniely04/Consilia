@@ -129,3 +129,24 @@ exports.updateBubbleCode = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getFriendGroupByBubbleCode = async (req, res) => {
+  try {
+    const { bubbleCode } = req.params;
+    if (!bubbleCode) {
+      return res.status(400).json({ message: "Bubble code is required" });
+  }
+    const group = await FriendGroup.findOne({ bubbleCode })
+      .populate("created_by", "username") 
+      .populate("members", "username") 
+
+    if (!group) {
+      return res.status(404).json({ message: "Friend group not found" });
+    }
+
+    res.status(200).json(group);
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

@@ -21,6 +21,7 @@ router.post("/activities", activityController.addActivity);
 
 //GET REQUESTS
 //displays all users in the database
+router.get('/friend-groups/bubble-code/:bubbleCode', friendGroupController.getFriendGroupByBubbleCode);
 router.get("/register", async (req, res) => {
   try {
     const users = await User.find({});
