@@ -1,3 +1,13 @@
 .options {
   color: black;
 }
+
+.results {
+  margin-left: 14%;
+  margin-right: 14%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}

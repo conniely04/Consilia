@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import "./Results.css";
 
 export default function Results(options) {
   const [results, setResults] = useState("");
@@ -55,13 +56,13 @@ export default function Results(options) {
   }, []);
   console.log("OPTIONS:", options);
   return (
-    <div>
+    <div className="container">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div>
           <h2>Generated Options</h2>
-          <p>{results}</p>
+          <div className="results">{results}</div>
         </div>
       )}
     </div>
