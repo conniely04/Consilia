@@ -78,25 +78,30 @@ export default function JoinBubble() {
   return (
     <div>
       <div>
-        <h1>Join Bubble</h1>
+        <h1>🔗Join Bubble🔗</h1>
       </div>
       <div>
-        <h2>Enter Bubble Code</h2>
-        <input
-          className="bubble-code-input"
-          type="text"
-          value={bubbleCode}
-          onChange={handleChange}
-          placeholder="Enter bubble code"
-        />
+        <div className="join-bubble-card">
+          <h2>Enter your Friend's Bubble Code</h2>
+          <input
+            className="bubble-code-input"
+            type="text"
+            value={bubbleCode}
+            onChange={handleChange}
+            placeholder="Enter code"
+          />
+        </div>
         <br></br>
         <br></br>
-        <button className="joinbutton" onClick={handleSubmit}>
-          Join
-        </button>
-        <button className="returnbutton" onClick={handleReturn}>
-          Return to User Home
-        </button>
+        <div className="spacing-between">
+          <button className="returnbutton" onClick={handleReturn}>
+            Return Home
+          </button>
+          <button className="joinbutton" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+
       </div>
     </div>
   );

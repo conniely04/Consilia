@@ -33,3 +33,9 @@
 .returnbutton:hover {
   background-color: rgb(227, 255, 237);
 }
+
+.join-bubble-card {
+  background-color: #1c7445;
+  padding: 5px 75px 25px 75px;
+  border-radius: 10px;
+}
