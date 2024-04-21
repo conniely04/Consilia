@@ -28,9 +28,9 @@ export default function CreateHangout() {
       </div>
       <div className="hangout-description-card">
         <h3>What do you want to do?</h3>
-        <h5>play sports, eat food, go shopping...</h5>
+        <h5>Ex: play sports, eat food, go shopping...</h5>
       </div>
-      <br/>
+      <br />
       <div className="input-bar">
         <input
           type="text"
@@ -39,13 +39,13 @@ export default function CreateHangout() {
           placeholder="Enter activity name here..."
         />
       </div>
-      <br/>
+      <br />
 
       <div className="hangout-description-card">
         <h3>What do you prefer?</h3>
-        <h5>specific food cuisines, low cost, nearby,..</h5>
+        <h5>Ex: food allergies, cravings, low cost, nearby...</h5>
       </div>
-      <br/>
+      <br />
       <div className="input-bar">
         <input
           type="text"
@@ -54,9 +54,15 @@ export default function CreateHangout() {
           placeholder="Enter your preferences here..."
         />
       </div>
-      <br/>
-      <button onClick={handleSubmission}>Submit</button>
-      <button onClick={handleBack}>Back</button>
+      <br />
+      <div className="buttons">
+        <div className="start-button">
+          <button onClick={handleBack}>Return Home</button>
+        </div>
+        <div className="start-button" >
+          <button onClick={handleSubmission}>Submit</button>
+        </div>
+      </div>
     </>
   );
 }

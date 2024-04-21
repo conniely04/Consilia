@@ -10,7 +10,7 @@
 
 .hangout-description-card {
     color: white;
-    padding: 1em;
+    padding: 1px;
     background-color: #1c7445;
     border-radius: 1em;
     justify-content: center;
@@ -79,7 +79,7 @@
 }
 
 .start-button button {
-    background-color: #1c7445;;
+    background-color: #1c7445;
     color: white;
 }
 
