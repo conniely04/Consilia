@@ -13,7 +13,7 @@ import HangoutSpace from "./Pages/HangoutSpace.jsx";
 import MemberList from "./Pages/MemberList.jsx";
 import JoinBubble from "./Pages/JoinBubble.jsx";
 import CreateBubble from "./Pages/CreateBubble.jsx";
-import Preferences from "./Pages/Preferences.jsx";
+import Results from "./Pages/Results.jsx";
 
 function App() {
   return (
@@ -30,11 +30,7 @@ function App() {
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
           <Route path="/members" element={<MemberList />} />
-<<<<<<< HEAD
-          <Route path ="/preferences" element={<Preferences/>}/>
-=======
-          <Route path="/preferences" element={<Preferences />} />
->>>>>>> 1b45fb7 (merging)
+          <Route path="/results" element={<Results />} />
         </Routes>
         <Footer />
       </BrowserRouter>

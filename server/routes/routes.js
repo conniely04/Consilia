@@ -20,7 +20,7 @@ router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
 router.post("/hangouts/create", hangoutController.createHangout);
 router.post("/hangouts/join", hangoutController.joinHangout);
 router.post("/activities", activityController.addActivity);
-router.post("/addPreferences", activityController.addPreferences);
+//router.post("/addPreferences", activityController.addPreferences);
 
 //GET REQUESTS
 //displays all users in the database

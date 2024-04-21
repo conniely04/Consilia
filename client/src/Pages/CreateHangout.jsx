@@ -7,7 +7,7 @@ export default function CreateHangout() {
   const [hangoutName, setHangoutName] = useState("");
   //get from data
   const [createdActivity, setCreatedActivity] = useState(false);
-  const [preferences, setPreferences] = useState(Array(1).fill(""));
+  const [preferences, setPreferences] = useState(Array(3).fill(""));
   const [activityName, setActivityName] = useState("");
   const [activityText, setActivityText] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate
@@ -18,46 +18,15 @@ export default function CreateHangout() {
   };
 
   const handleSubmit = () => {
-    const userId = getUserIdFromLocalStorage();
-    if (!userId) {
-      console.error("No user ID found in local storage.");
-      return;
-    }
     console.log("Submitting preferences:", preferences);
     fetch("http://127.0.0.1:5003/receive-activity", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ preferences }),
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        return response.json();
-      })
-      .then((data) => console.log("Preferences submitted:", data))
-      .catch((error) => console.error("Error submitting preferences:", error));
-
-    // Handle the submission, for example, send the hangoutName to your backend
-    setCreatedActivity(true);
-    setActivityName(hangoutName);
-    console.log("Hangout name submitted:", hangoutName);
-    setActivityText("Add Another Activity?");
-    console.log("Hangout name submitted:", hangoutName);
-    fetch("http://localhost:5002/api/activities", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
-        name: hangoutName,
-        hangout: hangoutId, // Ensure you have the hangoutId
-        created_by: userId, // Ensure you have the userId
-        preferences: [], // Initially might be empty or preset
+        activityName: hangoutName,
+        preferences: preferences,
       }),
     })
       .then((response) => {
@@ -66,8 +35,19 @@ export default function CreateHangout() {
         }
         return response.json();
       })
-      .then((data) => console.log("Activity created:", data))
-      .catch((error) => console.error("Error creating activity:", error));
+      .then((data) => console.log("Preferences submitted:", data))
+      .catch((error) => console.error("Error submitting preferences:", error));
+
+    // Handle the submission, for example, send the hangoutName to your backend
+    setCreatedActivity(true);
+    setActivityName(hangoutName);
+    console.log("RESULTS SENT TO GEMMY: ", hangoutName);
+    console.log("RESULTS SENT TO GEMMY: ", preferences);
+
+    console.log("Hangout name submitted:", hangoutName);
+    setActivityText("Add Another Activity?");
+    console.log("Hangout name submitted:", hangoutName);
+    navigate("/results");
   };
 
   const handleBack = () => {
@@ -79,7 +59,7 @@ export default function CreateHangout() {
     if (createdActivity) {
       return (
         <div className="start-button">
-          <button onClick={handleFinish}>FINISH</button>
+          {/* <button onClick={handleFinish}>FINISH</button> */}
         </div>
       );
     } else {
