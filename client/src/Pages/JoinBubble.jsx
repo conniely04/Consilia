@@ -10,6 +10,14 @@ export default function JoinBubble() {
   const handleChange = (event) => {
     setBubbleCode(event.target.value); // Update bubbleCode state with input value
   };
+  const handleReturn = () => {
+    // Handle returning to user home
+    console.log("Returning to user home");
+
+    // Clear bubbleCode and reset isCodeGenerated state
+    //setIsCodeGenerated(false);
+    nav(-1);
+  };
 
   const handleSubmit = async (event) => {
     // Handle form submission, e.g., send bubbleCode to backend
@@ -53,9 +61,11 @@ export default function JoinBubble() {
             toast.error("Failed to join group");
           }
         } else {
+          toast.error("Already in group");
           throw new Error("No match with friend group");
         }
       } else {
+        toast.error("Already in group");
         throw new Error("No match with friend group");
       }
     } catch (error) {
@@ -83,6 +93,9 @@ export default function JoinBubble() {
         <br></br>
         <button className="joinbutton" onClick={handleSubmit}>
           Join
+        </button>
+        <button className="returnbutton" onClick={handleReturn}>
+          Return to User Home
         </button>
       </div>
     </div>
