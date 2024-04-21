@@ -14,6 +14,7 @@
   color: rgb(13, 65, 30);
   width: 90px;
   font-weight: bold;
+  margin-right: 23px;
 }
 .joinbutton:hover {
   background-color: rgb(227, 255, 237);
@@ -22,4 +23,13 @@
 .buttontext {
   color: black;
   font-size: 20px;
+}
+.returnbutton {
+  color: rgb(13, 65, 30);
+  font-size: 15px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+.returnbutton:hover {
+  background-color: rgb(227, 255, 237);
 }
