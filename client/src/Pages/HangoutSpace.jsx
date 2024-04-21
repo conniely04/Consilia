@@ -31,7 +31,6 @@ export default function HangoutSpace() {
     <div key={index}>
       <button className="hangout-name">
         {group.name}
-        {/* Adjust the route to match your app's routing structure */}
         <Link to={`/hangouts/${group._id}`} className="hangout-link">
           <button className="join-button">Join</button>
         </Link>
