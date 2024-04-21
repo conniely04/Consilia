@@ -108,7 +108,9 @@ export default function CreateBubble() {
         <div>
           <h2>Bubble Code: {bubbleCode}</h2>
           <br />
-          <button onClick={handleReturn}>Return to User Home</button>
+          <button className="buttontext" onClick={handleReturn}>
+            Return to User Home
+          </button>
           <p>Make sure all team members have joined the bubble.</p>
         </div>
       )}
