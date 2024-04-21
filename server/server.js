@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
+const axios = require("axios");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 app.use(express.json());
@@ -36,6 +36,31 @@ app.use("/api", hangoutRoutes);
 
 const userRoutes = require("./routes/routes");
 app.use("/api", userRoutes);
+
+app.post("/send-activity", async (req, res) => {
+  const { activityName, preference, hangoutId } = req.body;
+
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:5003/receive-activity",
+      {
+        activityName,
+        preference,
+        hangoutId,
+      }
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(
+      "Error:",
+      error.response ? error.response.data : error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Something went wrong", details: error.message });
+  }
+});
 
 //endpoints
 app.get("/", (req, res) => {

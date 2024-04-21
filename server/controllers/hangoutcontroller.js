@@ -11,6 +11,23 @@ exports.createHangout = async (req, res) => {
       participants: [userId],
     });
     await newHangout.save();
+    const flaskServerUrl = "http://localhost:5003/receive-hangout-id"; // Change this to your Flask server URL
+    const hangoutIdResponse = await fetch(flaskServerUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hangoutId: newHangout._id.toString() }),
+    });
+
+    if (!hangoutIdResponse.ok) {
+      throw new Error("Failed to send hangout ID to Flask server");
+    }
+
+    const flaskResponse = await hangoutIdResponse.json();
+    res.status(201).json({
+      message: "Hangout created and ID sent to Flask server successfully",
+      flaskServerResponse: flaskResponse,
+      hangoutDetails: newHangout,
+    });
 
     res.status(201).json(newHangout);
   } catch (error) {

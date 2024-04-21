@@ -10,6 +10,8 @@ const Activity = require("../schemas/activity");
 const FriendGroup = require("../schemas/friendgroup");
 const Hangout = require("../schemas/hangout");
 
+// const fetch = require("node-fetch");
+
 //post requests
 router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
@@ -33,8 +35,10 @@ router.get("/register", async (req, res) => {
 });
 
 //Put requests
-router.put("/friend-groups/:groupId/bubble-code", friendGroupController.updateBubbleCode);
-
+router.put(
+  "/friend-groups/:groupId/bubble-code",
+  friendGroupController.updateBubbleCode
+);
 
 //displays all friend groups in the database
 router.get("/friend-groups", async (req, res) => {
@@ -86,5 +90,33 @@ router.get("/friend-groups/:groupId/members", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+//sending activity name and preference to flask
+
+router.get("/hangouts/:hangoutId/activity", async (req, res) => {
+  try {
+    const { hangoutId } = req.params;
+
+    // Find the activity associated with the hangout
+    const activity = await Activity.findOne({ hangout: hangoutId })
+      .select("name preferences")
+      .populate("created_by", "username");
+
+    if (!activity) {
+      return res.status(404).json({ message: "Activity not found" });
+    }
+
+    // Send the activity name, preferences, and creator's username to the Flask server
+    res.json({
+      name: activity.name,
+      preferences: activity.preferences,
+      createdBy: activity.created_by.username,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//for real sending the hangout id to flask
 
 module.exports = router;

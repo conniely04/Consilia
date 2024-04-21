@@ -11,6 +11,7 @@
 .bubble-button {
   border-radius: 0;
   color: black;
+  max-width: 350px;
 }
 
 .bubble-name {
