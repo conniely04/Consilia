@@ -1,11 +1,18 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
 const bodyParser = require("body-parser");
 require("dotenv").config();
 app.use(express.json());
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow only your frontend origin
+  })
+);
 
 //mongo set up
 const mongoose = require("mongoose");

@@ -1,15 +1,46 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 // import './Login.css';  // Assume you have styles defined in Login.css
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle login logic here
+        
+        // Handle account login logic here
+        const url = "http://localhost:5001/api/login";
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: username,
+              password: password,
+            }),
+          });
+    
+          if (response.ok) {
+            const result = await response.json();
+            console.log("Logged in successfully:", result);
+            alert("Logged in successfully");
+
+            // Redirect to user_home after successful login
+            navigate('/user-home');
+          } else {
+            throw new Error("Failed to login");
+          }
+        } catch (error) {
+          console.error("Error creating account:", error);
+          alert(`Error: ${error.message}`);
+        }
+    
         console.log("Login with", username, password);
-    };
+      };
 
     return (
         <div className="login-container">
@@ -22,7 +53,9 @@ function Login() {
                     Password:
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                 </label>
-                <button type="submit">Login</button>
+                <div className="start-button">
+                <button type="submit">LOGIN</button>
+                </div>
             </form>
         </div>
     );

@@ -4,7 +4,7 @@ import Login from "./Pages/Login";
 import CreateAccount from "./Pages/CreateAccount";
 import CreateHangout from "./Pages/CreateHangout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Footer from './Components/Footer.jsx'
+import Footer from "./Components/Footer.jsx";
 import User_Home from "./Pages/User_Home.jsx";
 import HangoutSpace from "./Pages/HangoutSpace.jsx";
 import MemberList from "./Pages/MemberList.jsx";

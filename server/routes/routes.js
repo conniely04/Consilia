@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const friendGroupController = require("../controllers/friendgroupcontroller"); // Make sure the path is correct
 const activityController = require("../controllers/activitycontroller");
 const locationController = require("../controllers/locationcontroller");
@@ -11,19 +10,14 @@ const Activity = require("../schemas/activity");
 const FriendGroup = require("../schemas/friendgroup");
 const Hangout = require("../schemas/hangout");
 
-// Define routes and associate them with controller methods
+//post requests
+router.post("/register", userController.registerUser);
+router.post("/login", userController.loginUser)
 router.post("/friend-groups/create", friendGroupController.createFriendGroup);
 router.post("/friend-groups/join", friendGroupController.joinFriendGroup);
-router.post("/activities/add", activityController.addActivity);
-//router.post("/locations", locationController.createLocation);
-router.post("/hangouts/create", hangoutController.createHangout);
-router.post("/register", userController.registerUser);
 
-//joining friend group with user login
-// router.post("/join-group", userController.joinFriendGroup);
-// router.post("/create", friendGroupController.createFriendGroup);
-
-// get methods
+//GET REQUESTS
+//displays all users in the database
 router.get("/register", async (req, res) => {
   try {
     const users = await User.find({});
@@ -35,19 +29,7 @@ router.get("/register", async (req, res) => {
   }
 });
 
-router.get("/activities", async (req, res) => {
-  try {
-    const activities = await Activity.find({});
-    console.log(activities); // This will print the activities to the console
-    res.json(activities); // This sends the activities to the client
-  } catch (error) {
-    console.error("Failed to fetch activities:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to fetch activities", error: error });
-  }
-});
-
+//displays all friend groups in the database
 router.get("/friend-groups", async (req, res) => {
   try {
     const friendGroups = await FriendGroup.find({});
@@ -60,6 +42,10 @@ router.get("/friend-groups", async (req, res) => {
       .json({ message: "Failed to fetch friend groups", error: error });
   }
 });
+
+//FRONTEND USE THIS TO DISPLAY FRIEND GROUPS for all users
+router.get("/friend-groups/:groupId", friendGroupController.getFriendGroup);
+router.get("/user/");
 
 router.get("/hangouts", async (req, res) => {
   try {
