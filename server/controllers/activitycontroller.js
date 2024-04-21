@@ -29,3 +29,18 @@ exports.addActivity = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Example GET endpoint for retrieving activities in a hangout
+exports.getActivitiesByHangout = async (req, res) => {
+  const { hangoutId } = req.params;
+
+  try {
+    // Find all activities associated with the hangout
+    const activities = await Activity.find({ hangout: hangoutId });
+
+    res.json(activities);
+  } catch (error) {
+    console.error("Failed to retrieve activities:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

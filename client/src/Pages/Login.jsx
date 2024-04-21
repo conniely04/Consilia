@@ -46,6 +46,13 @@ function Login() {
     console.log("Login with", username, password);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      handleSubmit(event); 
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="title-name">
@@ -74,6 +81,7 @@ function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleKeyDown} // Attach handleKeyDown event listener
               />
             </label>
           </div>
