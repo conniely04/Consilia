@@ -92,3 +92,23 @@ exports.getHangout = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getHangoutsByFriendGroupId = async (req, res) => {
+  try {
+    const { friendGroupId } = req.params; 
+
+    const hangouts = await Hangout.find({ friendGroup: friendGroupId })
+      .populate('created_by', 'username')
+      .populate('participants', 'username')
+      .populate('activities'); 
+
+    if (!hangouts || hangouts.length === 0) {
+      return res.status(404).json({ message: 'No hangouts found for this friend group' });
+    }
+
+    res.status(200).json(hangouts);
+  } catch (error) {
+    console.error('Error fetching hangouts:', error);
+    res.status(500).json({ error: error.message });
+  }
+};

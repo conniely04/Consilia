@@ -6,13 +6,15 @@ export default function CreateBubble() {
   const [bubbleName, setBubbleName] = useState("");
   const [isCodeGenerated, setIsCodeGenerated] = useState(false);
   const nav = useNavigate();
-  const bubbleCode = Math.floor(100000 + Math.random() * 900000);
+  const[bubbleCode,setBubbleCode] =setState(null);
 
   const handleChange = (event) => {
     setBubbleName(event.target.value);
   };
 
   const generateCode = async (event) => {
+    setBubbleCode(Math.floor(100000 + Math.random() * 900000));
+    console.log(bubbleCode);
     event.preventDefault();
 
     const url = "http://localhost:5002/api/friend-groups/create";

@@ -4,9 +4,11 @@ import React, { useState, useEffect } from "react";
 
 export default function HangoutSpace() {
   const { userId } = useParams();
-  const [friendGroups, setFriendGroups] = useState([]);
+  const [hangoutGroups, setHangoutGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { name } = useParams();
+  const { bubbleId } = useParams();
+  
+  /*
   useEffect(() => {
     // Fetch the friend groups when the component mounts
     const fetchFriendGroups = async () => {
@@ -25,9 +27,37 @@ export default function HangoutSpace() {
     };
 
     fetchFriendGroups();
-  }, [userId]);
+  }, [userId]);*/
 
-  const propogateHangouts = friendGroups.map((group, index) => (
+  useEffect(() => {
+    const fetchHangoutSpace = async () => {
+      const url = `http://localhost:5002/api/friend-groups/${bubbleId}/hangouts`;
+      console.log(bubbleId)
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setHangoutGroups(result);
+          console.log("Successfully got hangout space", result);
+        } else {
+          throw new Error("Failed to get hangout space");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchHangoutSpace();
+  }, []);
+
+  const propogateHangouts = hangoutGroups.map((group, index) => (
     <div key={index}>
       <button className="hangout-name">
         {group.name}
@@ -42,7 +72,7 @@ export default function HangoutSpace() {
   return (
     <div>
       <h1 className="hangout_space_title">
-        {group.name} <span className="username"></span>
+        
       </h1>
       <hr />
 
@@ -50,3 +80,5 @@ export default function HangoutSpace() {
     </div>
   );
 }
+
+//{group.name} <span className="username"></span>
