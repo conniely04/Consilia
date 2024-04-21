@@ -1,0 +1,19 @@
+.recommendations-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white; /* Set background color to white */
+    border-radius: 10px; /* Curl the corners */
+  }
+  
+  .rec-title {
+    color: black;
+  }
+  
+  .recommendation-item {
+    color: black; /* Set text color to black */
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  

@@ -10,10 +10,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Components/Footer.jsx";
 import User_Home from "./Pages/User_Home.jsx";
 import HangoutSpace from "./Pages/HangoutSpace.jsx";
-import MemberList from "./Pages/MemberList.jsx";
 import JoinBubble from "./Pages/JoinBubble.jsx";
 import CreateBubble from "./Pages/CreateBubble.jsx";
-import Preferences from "./Pages/Preferences.jsx";
+import Recommendations from "./Pages/Recommendations.jsx";
 
 function App() {
   return (
@@ -29,8 +28,7 @@ function App() {
           <Route path="/join-bubble" element={<JoinBubble />} />
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
-          <Route path="/members" element={<MemberList />} />
-          <Route path="/preferences" element={<Preferences />} />
+          <Route path ="/recommendations" element ={<Recommendations/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>

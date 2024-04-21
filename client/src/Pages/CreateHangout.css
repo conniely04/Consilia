@@ -4,6 +4,9 @@
     padding: 10vw;
     text-align: center;
 }
+.preferences-section{
+    margin-top: 80px;
+}
 
 .hangout-description-card {
     color: white;
@@ -76,7 +79,7 @@
 }
 
 .start-button button {
-    background-color: #004419;
+    background-color: #1c7445;;
     color: white;
 }
 
