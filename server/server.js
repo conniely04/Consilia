@@ -38,7 +38,7 @@ const userRoutes = require("./routes/routes");
 app.use("/api", userRoutes);
 
 app.post("/send-activity", async (req, res) => {
-  const { activityName, preference, hangoutId } = req.body;
+  const { activityName, preference } = req.body;
 
   try {
     const response = await axios.post(
@@ -46,7 +46,6 @@ app.post("/send-activity", async (req, res) => {
       {
         activityName,
         preference,
-        hangoutId,
       }
     );
 
