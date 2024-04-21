@@ -16,6 +16,7 @@ import Results from "./Pages/Results.jsx";
 
 function App() {
   const [options, setOptions] = useState([]);
+  console.log("OPTIONS FROM APP:", options);
   return (
     <>
       <ToastContainer />
@@ -32,7 +33,7 @@ function App() {
           <Route path="/join-bubble" element={<JoinBubble />} />
           <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
-          <Route path="/members" element={<MemberList />} />
+          {/* <Route path="/members" element={<MemberList />} /> */}
           <Route path="/results" element={<Results options={options} />} />
         </Routes>
         <Footer />

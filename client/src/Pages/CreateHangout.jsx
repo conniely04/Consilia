@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import "./CreateHangout.css";
 
-export default function CreateHangout(setOptions) {
+export default function CreateHangout() {
+  const [results, setResults] = useState([]); // Initialize results state
   const [hangoutName, setHangoutName] = useState("");
   //get from data
   const [createdActivity, setCreatedActivity] = useState(false);
@@ -32,7 +33,10 @@ export default function CreateHangout(setOptions) {
       })
       .then((data) => {
         console.log("Preferences submitted:", data.options);
-        setOptions(data.options); // Set options in the parent state
+        localStorage.setItem("optionsData", JSON.stringify(data.options));
+        navigate("/results");
+
+        //setOptions(data.options); // Set options in the parent state
       })
       .catch((error) => console.error("Error submitting preferences:", error));
 
@@ -45,7 +49,6 @@ export default function CreateHangout(setOptions) {
     console.log("Hangout name submitted:", hangoutName);
     setActivityText("Add Another Activity?");
     console.log("Hangout name submitted:", hangoutName);
-    navigate("/results");
   };
 
   const handleBack = () => {
@@ -63,7 +66,7 @@ export default function CreateHangout(setOptions) {
     } else {
       return (
         <div className="start-button">
-          <button onClick={handleBack}>RETURN</button>
+          <button onClick={handleSubmit}>RETURN</button>
         </div>
       );
     }
@@ -108,7 +111,7 @@ export default function CreateHangout(setOptions) {
           <button onClick={handleBack}>Return Home</button>
         </div>
         <div className="start-button">
-          <button onClick={handleSubmission}>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
         </div>
       </div>
     </>
