@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./CreateBubble.css";
 
 let groupId = "";
@@ -8,7 +8,7 @@ export default function CreateBubble() {
   const [bubbleName, setBubbleName] = useState("");
   const [isCodeGenerated, setIsCodeGenerated] = useState(false);
   const nav = useNavigate();
-  const[bubbleCode,setBubbleCode]= useState(null);
+  const [bubbleCode, setBubbleCode] = useState(null);
 
   const handleChange = (event) => {
     setBubbleName(event.target.value);
@@ -22,7 +22,7 @@ export default function CreateBubble() {
 
     const url = "http://localhost:5002/api/friend-groups/create";
     const userId = localStorage.getItem("userId");
-    
+
 
     try {
       const response = await fetch(url, {
@@ -112,20 +112,24 @@ export default function CreateBubble() {
       {!isCodeGenerated ? (
         <div>
           <div className="enter-bubble-section">
-          <h2>What would you like to name your bubble?</h2>
-          <input
-            className="bubble-code-input"
-            type="text"
-            value={bubbleName}
-            onChange={handleChange}
-            placeholder="Enter Bubble's name"
-          />
-          <br />
-          <br />
+            <h2>What would you like to name your bubble?</h2>
+            <input
+              className="bubble-code-input"
+              type="text"
+              value={bubbleName}
+              onChange={handleChange}
+              placeholder="Enter Bubble's name"
+            />
+            <br />
+            <br />
           </div>
-          <button className="joinbutton" onClick={generateCode}>
-            Create
-          </button>
+          <div className="spacing-between">
+            <Link to="/user-home"><button className="join-button">Return Home</button></Link>
+            <button className="join-button" onClick={generateCode}>
+              Submit
+            </button>
+          </div>
+
         </div>
       ) : (
         <div>
