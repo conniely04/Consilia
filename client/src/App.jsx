@@ -22,8 +22,7 @@ function App() {
           <Route path="/bubbles/:name" element={<HangoutSpace />} />
           <Route path="/create-hangout" element={<CreateHangout />} />
           <Route path="/join-bubble" element={<JoinBubble />} />
-          <Route path="/create-bubble" element={<CreateBubble/>} />
-
+          <Route path="/create-bubble" element={<CreateBubble />} />
           <Route path="/user-home" element={<User_Home />} />
           <Route path="members" element={<MemberList />} />
         </Routes>

@@ -48,6 +48,7 @@ router.get("/friend-groups", async (req, res) => {
 
 //FRONTEND USE THIS TO DISPLAY FRIEND GROUPS for all users
 router.get("/friend-groups/:userId", friendGroupController.getUserFriendGroups);
+
 router.get("/friend-groups/:groupId", friendGroupController.getFriendGroup);
 //get user friend group
 router.get(
