@@ -27,6 +27,6 @@ https://devpost.com/software/consilia-ighv19
    ```bash
    cd server && cd genai
 
-3. ** Run the Python Backend:**
+3. **Run the Python Backend:**
    ```bash
    python app.py
