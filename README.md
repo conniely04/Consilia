@@ -3,10 +3,10 @@
 ## Overview
 Consilia is a full-stack application designed for LA Hacks 2024. It focuses on connecting friends and facilitating outdoor adventures. The app allows users to exchange event ideas and update their preferences within the app interface. Utilizing AI technology, Consilia analyzes these preferences and geographic locations to offer tailored recommendations for group activities that align with everyone’s interests.
 
-##Project Link
+## Project Link
 https://www.consilia.tech/
 
-##Devpost:
+## Devpost:
 https://devpost.com/software/consilia-ighv19
 
 ## How to Run the Application
